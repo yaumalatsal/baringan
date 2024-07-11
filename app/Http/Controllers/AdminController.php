@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Floor;
+use App\Models\Item;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -25,10 +26,12 @@ class AdminController extends Controller
         return view('admin.floor', compact('floors', 'rooms', 'lantai'));
     }
 
+
+
     public function rooms($id)
     {
         $floors = Floor::all();
-        
+
         // Menggunakan eager loading untuk memuat relasi items
         $rooms = Room::with('items')->find($id);
 
@@ -41,5 +44,39 @@ class AdminController extends Controller
         $items = $rooms->items;
 
         return view('admin.room', compact('floors', 'items', 'rooms'));
+    }
+
+    public function items($id)
+    {
+        $floors = Floor::all();
+
+        $item = Item::find($id);
+
+        return view('admin.items', compact('floors', 'item'));
+    }
+
+    public function editItem($id)
+    {
+        $floors = Floor::all();
+
+        $item = Item::find($id);
+        if (!$item) {
+            abort(404); // Jika room tidak ditemukan, tampilkan 404 error
+        }
+
+        return view('admin.items.edit', compact('floors', 'item'));
+    }
+
+    public function updateItem(Request $request, $id)
+    {
+        $floors = Floor::all();
+
+        $item = Item::find($id);
+        if (!$item) {
+            abort(404); // Jika room tidak ditemukan, tampilkan 404 error
+        }
+        $item->update($request->all());
+
+        return view('admin.items.edit', compact('floors', 'item'));
     }
 }

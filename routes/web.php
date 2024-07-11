@@ -21,6 +21,8 @@ Route::middleware([
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/floors/{id}', [AdminController::class, 'floors'])->name('admin.floors');
 Route::get('/admin/rooms/{id}', [AdminController::class, 'rooms'])->name('admin.rooms');
+Route::get('/admin/items/{id}', [AdminController::class, 'items'])->name('admin.items');
+Route::get('/admin/items/{id}/edit', [AdminController::class, 'editItem'])->name('admin.items.edit');
 
 Route::get('/generate-qrcode', 'QrCodeController@generate');
 Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
