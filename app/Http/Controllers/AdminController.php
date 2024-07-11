@@ -172,4 +172,72 @@ class AdminController extends Controller
         return redirect()->route('admin.rooms', ['id' => $room_id])
             ->with('success', 'Item deleted successfully.');
     }
+
+
+    // floor
+    public function createFloor()
+    {
+        $floors = Floor::all();
+
+        return view('admin.floors.create', compact('floors'));
+    }
+
+    public function storeFloor(Request $request)
+    {
+        $floors = Floor::all();
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        Floor::create($validatedData);
+
+        return redirect()->route('admin')
+            ->with('success', 'Item deleted successfully.');
+    }
+
+    public function editFloor($id)
+    {
+        $floors = Floor::all();
+        $floor = Floor::find($id);
+
+        return view('admin.floors.edit', compact('floors', 'floor'));
+    }
+
+    public function updateFloor(Request $request, $id)
+    {
+        $floor = Floor::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $floor->update($validatedData);
+
+        return redirect()->route('admin')
+            ->with('success', 'Floor updated successfully.');
+    }
+
+
+    // floor
+    public function createRoom()
+    {
+        $floors = Floor::all();
+
+        return view('admin.rooms.create', compact('floors'));
+    }
+
+    public function storeRoom(Request $request)
+    {
+        $floors = Floor::all();
+        $validatedData = $request->validate([
+            'floor_id' => 'required',
+            'name' => 'required',
+        ]);
+
+        Room::create($validatedData);
+
+        return redirect()->route('admin.floors', ['id' => $request->floor_id])
+            ->with('success', 'Item deleted successfully.');
+    }
+
 }

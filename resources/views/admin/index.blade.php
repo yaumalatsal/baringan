@@ -2,8 +2,9 @@
 
 
 @section('content')
-    <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
+    <div class=" container-fluid d-flex justify-content-between fw-bold pt-4 mb-4">
         <h3>List Lantai </h3>
+        <a href="{{ route('admin.floors.create') }}" class="btn btn-block btn-success w-auto">Add Lantai</a>
     </div>
     <div class="row">
         @foreach ($floors as $floor)

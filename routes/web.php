@@ -31,6 +31,16 @@ Route::middleware([
     Route::get('/admin/items/{id}/edit', [AdminController::class, 'editItem'])->name('admin.items.edit');
     Route::put('/admin/items/{id}', [AdminController::class, 'updateItem'])->name('admin.items.update');
     Route::delete('/admin/items/{id}', [AdminController::class, 'destroyItem'])->name('admin.items.delete');
+    
+    // floor
+    Route::get('/admin/floors', [AdminController::class, 'createFloor'])->name('admin.floors.create');
+    Route::post('/admin/floors', [AdminController::class, 'storeFloor'])->name('admin.floors.store');
+    Route::post('/admin/floors/{id}', [AdminController::class, 'editFloor'])->name('admin.floors.edit');
+    Route::put('/admin/floors/{id}', [AdminController::class, 'updateFloor'])->name('admin.floors.update');
+
+    // room
+    Route::get('/admin/rooms', [AdminController::class, 'createroom'])->name('admin.rooms.create');
+    Route::post('/admin/rooms', [AdminController::class, 'storeroom'])->name('admin.rooms.store');
 });
 Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
 
