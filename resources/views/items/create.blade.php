@@ -1,41 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Add New Item</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Item</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Add New Item</h1>
+    <div class="container mt-4">
+        <h1>Create Item</h1>
+        <form action="{{ route('items.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="code">Code</label>
+                <input type="text" name="code" id="code" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="entry_date">Entry Date</label>
+                <input type="date" name="entry_date" id="entry_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="last_checked_date">Last Checked Date</label>
+                <input type="date" name="last_checked_date" id="last_checked_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="item_condition">Condition</label>
+                <input type="text" name="item_condition" id="item_condition" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" name="image" id="image" class="form-control">
+            </div>
+            <!-- Input hidden untuk floor_id dan room_id -->
+            <div class="form-group">
+                <label for="floor_id">Floor ID</label>
+                <input type="text" name="floor_id" id="floor_id" class="form-control" value="{{ $room->floor_id }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="room_id">Room ID</label>
+                <input type="text" name="room_id" id="room_id" class="form-control" value="{{ $room->id }}" readonly>
+            </div>
+            
+            <button type="submit" class="btn btn-success">Create Item</button>
+        </form>
+    </div>
 
-    <form action="{{ route('items.store') }}" method="post">
-        @csrf
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="code">Code:</label>
-            <input type="text" id="code" name="code" required>
-        </div>
-        <div>
-            <label for="entry_date">Entry Date:</label>
-            <input type="date" id="entry_date" name="entry_date" required>
-        </div>
-        <div>
-            <label for="last_checked_date">Last Checked Date:</label>
-            <input type="date" id="last_checked_date" name="last_checked_date" required>
-        </div>
-        <div>
-            <label for="item_condition">Condition:</label>
-            <input type="text" id="item_condition" name="item_condition" required>
-        </div>
-        <div>
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
-        </div>
-        <input type="hidden" name="room_id" value="{{ $room->id }}">
-        <button type="submit">Add Item</button>
-    </form>
-
-    <a href="{{ url('/rooms/' . $room->id . '/items') }}">Back to Items</a>
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

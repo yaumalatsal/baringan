@@ -9,11 +9,13 @@ class Item extends Model
 {
     protected $fillable = [
         'room_id',
+        'floor_id',
         'name',
         'code',
         'entry_date',
         'last_checked_date',
         'item_condition',
+        'image'
  
     ];
 
