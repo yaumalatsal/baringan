@@ -4,25 +4,13 @@
 @section('content')
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
         <h3>List Barang </h3>
-        <a href="" class="btn btn-block btn-success w-auto">Add Items</a>
+        <a href="{{ route('admin.items.create') }}" class="btn btn-block btn-success w-auto">Add Items</a>
     </div>
     <div class="row mt-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Responsive Hover Table</h3>
-
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 class="card-title">List Barang</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
@@ -42,8 +30,8 @@
                         <tbody>
                             @foreach ($items as $item)
                                 <tr>
-                                    <td>{{ QrCode::size(100)->generate(url('/items/' . $item->id)) }}</td>
-                                    <td>John Doe</td>
+                                    <td>{{ QrCode::size(100)->generate(url('/admin/items/' . $item->id)) }}</td>
+                                    <td><img src="{{ $item->image ? asset('storage/images/' . $item->image) : asset('image/image-not-found.jpeg') }}" alt="{{ $item->name }}" class="img-fluid" style="width: 100px; height: 100px;"></td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->condition }}</td>

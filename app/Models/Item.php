@@ -14,7 +14,7 @@ class Item extends Model
         'code',
         'entry_date',
         'last_checked_date',
-        'item_condition',
+        'condition',
         'image'
  
     ];

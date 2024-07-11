@@ -14,64 +14,62 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{ route('items.update', ['item' => $item->id]) }}">
+                <form action="{{ route('admin.items.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                        <div class="mx-auto my-4">
-                            {{ QrCode::size(100)->generate(url('/items/' . $item->id)) }}
-                        </div>
-
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter name"
-                                name="name" value="{{ $item->name }}">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $item->name }}">
                         </div>
                         <div class="form-group">
                             <label for="code">Code</label>
-                            <input type="code" class="form-control" id="code" placeholder="Enter code"
-                                name="code" value="{{ $item->code }}">
+                            <input type="text" class="form-control" id="code" name="code" value="{{ $item->code }}">
                         </div>
                         <div class="form-group">
-                            <label for="condition">Kondisi</label>
-                            <input type="text" class="form-control" id="condition" placeholder="Enter condition"
-                                name="condition" value="{{ $item->condition }}">
+                            <label for="condition">Condition</label>
+                            <input type="text" class="form-control" id="condition" name="condition" value="{{ $item->condition }}">
                         </div>
                         <div class="form-group">
                             <label for="entry_date">Entry Date:</label>
-                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                <input type="date" id="entry_date" class="form-control datetimepicker-input"
-                                    data-target="#reservationdate" name="entry_date" value="{{ $item->entry_date }}" />
-                            </div>
+                            <input type="date" id="entry_date" class="form-control" name="entry_date" value="{{ $item->entry_date }}">
                         </div>
                         <div class="form-group">
                             <label for="last_checked_date">Last Checked Date:</label>
-                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                <input type="date" id="last_checked_date" class="form-control datetimepicker-input"
-                                    data-target="#reservationdate" name="last_checked_date"
-                                    value="{{ $item->last_checked_date }}" />
-                            </div>
+                            <input type="date" id="last_checked_date" class="form-control" name="last_checked_date" value="{{ $item->last_checked_date }}">
                         </div>
+            
+                        <div class="form-group">
+                            <label for="floor">Floor</label>
+                            <select id="floor" name="floor_id" class="form-control select2bs4" style="width: 100%;">
+                                <option value="">Select Floor</option>
+                                @foreach ($floors as $floor)
+                                    <option value="{{ $floor->id }}" {{ $floor->id == $item->room->floor_id ? 'selected' : '' }}>{{ $floor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="room">Room</label>
+                            <select id="room" name="room_id" class="form-control select2bs4" style="width: 100%;">
+                                <option value="">Select Room</option>
+                                @foreach ($rooms as $room)
+                                    <option value="{{ $room->id }}" {{ $room->id == $item->room_id ? 'selected' : '' }}>{{ $room->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="image">Image:</label>
-                            <input type="file" class="form-control-file" id="image" name="image" accept="image/*"
-                                required>
-                            {{-- <label for="exampleInputFile">File input</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Upload</span>
-                                </div>
-                            </div> --}}
+                            <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+                            @if($item->image)
+                                <img src="{{ asset('storage/images/' . $item->image) }}" alt="Item Image" width="100">
+                            @endif
                         </div>
                     </div>
-                    <!-- /.card-body -->
-
+            
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

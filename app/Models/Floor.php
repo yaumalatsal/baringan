@@ -9,8 +9,7 @@ class Floor extends Model
 {
     use HasFactory;
     public function rooms()
-{
-    return $this->hasMany(Room::class);
-}
-
+    {
+        return $this->hasMany(Room::class);
+    }
 }

@@ -37,7 +37,8 @@
                     @foreach($items as $item)
                         <tr>
                             <td><img src="{{ QrCode::size(50)->generate(url('/items/' . $item->id)) }}" alt="QR Code"></td>
-                            <td><img src="{{ asset('storage/images/' . $item->image) }}" alt="{{ $item->name }}" class="img-fluid" style="width: 100px; height: 100px;"></td>
+                            <td><img src="{{ $item->image ? asset('storage/images/' . $item->image) : asset('image/image-not-found.jpeg') }}" alt="{{ $item->name }}" class="img-fluid" style="width: 100px; height: 100px;">
+                            </td>
 
                             <td>{{ $item->room->floor_id }}</td>
                             <td>{{ $item->room->name }}</td>
