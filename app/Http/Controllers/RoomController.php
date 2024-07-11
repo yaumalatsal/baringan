@@ -12,5 +12,8 @@ class RoomController extends Controller
         $rooms = $floor->rooms;
         return view('rooms.index', compact('rooms', 'floor'));
     }
+
+   
+
 }
 

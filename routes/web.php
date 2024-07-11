@@ -28,7 +28,6 @@ Route::get('/floors/{floor}/rooms', [RoomController::class, 'index']);
 
 Route::get('/floors/{floor}/rooms', [FloorController::class, 'rooms'])->name('floor.rooms');
 
-
 Route::get('/rooms/{room}/items', [ItemController::class, 'index']);
 Route::get('/items/{item}', [ItemController::class, 'show']);
 Route::resource('items', ItemController::class);
