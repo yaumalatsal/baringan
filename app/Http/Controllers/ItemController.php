@@ -9,10 +9,21 @@ use Illuminate\Http\Request;
 class ItemController extends Controller
 {
     public function index(Room $room)
-    {
-        $items = $room->items;
-        return view('items.index', compact('items', 'room'));
+{
+    // Menggunakan eager loading untuk memuat relasi items
+    $room = Room::with('items')->find($room->id);
+
+    // Mengecek apakah room ditemukan
+    if (!$room) {
+        abort(404); // Jika room tidak ditemukan, tampilkan 404 error
     }
+
+    // Mengambil semua items yang terkait dengan room
+    $items = $room->items;
+
+    return view('items.index', compact('items', 'room'));
+}
+
 
     public function show(Item $item)
     {

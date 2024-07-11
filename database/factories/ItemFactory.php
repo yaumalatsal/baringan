@@ -23,7 +23,7 @@ class ItemFactory extends Factory
             'code' => $this->faker->unique()->word,
             'entry_date' => $this->faker->date,
             'last_checked_date' => $this->faker->date,
-            'condition' => $this->faker->word,
+            'item_condition' => $this->faker->word,
             'room_id' => \App\Models\Room::factory(),
         ];
     }
