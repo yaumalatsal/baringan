@@ -41,7 +41,11 @@
                                         <div class="flex">
                                             <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-primary">View</a>
                                             <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-block btn-warning">Edit</a>
-                                            <a href="" class="btn btn-block btn-danger">Delete</a>
+                                            <form action="{{ route('admin.items.delete', $item->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirmDelete(this);">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-block btn-danger">Delete</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

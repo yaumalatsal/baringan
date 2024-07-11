@@ -157,4 +157,19 @@ class AdminController extends Controller
 
         return view('admin.items.edit', compact('floors', 'item'));
     }
+    public function destroyItem($id)
+    {
+        $item = Item::find($id);
+
+        // Delete the associated image file
+        if ($item->image && Storage::disk('public')->exists('images/' . $item->image)) {
+            Storage::disk('public')->delete('images/' . $item->image);
+        }
+
+        $room_id = $item->room_id;
+        $item->delete();
+
+        return redirect()->route('admin.rooms', ['id' => $room_id])
+            ->with('success', 'Item deleted successfully.');
+    }
 }

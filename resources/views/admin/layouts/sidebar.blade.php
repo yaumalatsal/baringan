@@ -33,48 +33,51 @@
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
-              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                  data-accordion="false">
-                  <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                  <li class="nav-item">
-                      <a href="{{ route('admin') }}" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>
-                              Dashboard
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item menu-open">
-                      <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>
-                              Lantai
-                              <i class="right fas fa-angle-left"></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                          @foreach ($floors as $floor)
-                              {{-- <li><a href="{{ route('floor.rooms', ['floor' => $floor->id]) }}">{{ $floor->name }}</a>
-                              </li> --}}
-
-                              <li class="nav-item">
-                                  <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link">
-                                      <i class="far fa-circle nav-icon"></i>
-                                      <p>{{ $floor->name }}</p>
-                                  </a>
-                              </li>
-                          @endforeach
-                          {{-- <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li> --}}
-                      </ul>
-                  </li>
-              </ul>
-          </nav>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Dashboard Link -->
+                <li class="nav-item">
+                    <a href="{{ route('admin') }}" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+        
+                <!-- Lantai Menu -->
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Lantai
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach ($floors as $floor)
+                            <li class="nav-item">
+                                <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{ $floor->name }}</p>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+            </ul>
+        
+            <!-- Logout Link -->
+            <ul class="navbar-nav text-center mt-40">
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="nav-link">
+                            
+                            <p><i class="fas fa-sign-out-alt nav-icon"></i>  Logout</p>
+                        </a>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        
           <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->

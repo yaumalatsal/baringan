@@ -111,6 +111,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
     </script>
+    <script>
+        function confirmDelete(form) {
+            return confirm('Are you sure you want to delete this item?');
+        }
+    </script>
 </body>
 
 </html>

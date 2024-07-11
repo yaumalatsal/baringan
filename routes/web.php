@@ -4,33 +4,39 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QrCodeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/admin', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+
+    Route::get('/', function () {
+        return redirect()->route('admin');
+    });
+
+
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin/floors/{id}', [AdminController::class, 'floors'])->name('admin.floors');
+    Route::get('/admin/rooms/{id}', [AdminController::class, 'rooms'])->name('admin.rooms');
+    Route::get('/admin/items/{id}', [AdminController::class, 'items'])->name('admin.items');
+    Route::get('/admin/items', [AdminController::class, 'createItem'])->name('admin.items.create');
+    Route::post('/admin/items', [AdminController::class, 'storeItem'])->name('admin.items.store');
+    Route::get('/admin/items/{id}/edit', [AdminController::class, 'editItem'])->name('admin.items.edit');
+    Route::put('/admin/items/{id}', [AdminController::class, 'updateItem'])->name('admin.items.update');
+    Route::delete('/admin/items/{id}', [AdminController::class, 'destroyItem'])->name('admin.items.delete');
 });
-
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-Route::get('/admin/floors/{id}', [AdminController::class, 'floors'])->name('admin.floors');
-Route::get('/admin/rooms/{id}', [AdminController::class, 'rooms'])->name('admin.rooms');
-Route::get('/admin/items/{id}', [AdminController::class, 'items'])->name('admin.items');
-Route::get('/admin/items', [AdminController::class, 'createItem'])->name('admin.items.create');
-Route::post('/admin/items', [AdminController::class, 'storeItem'])->name('admin.items.store');
-Route::get('/admin/items/{id}/edit', [AdminController::class, 'editItem'])->name('admin.items.edit');
-Route::put('/admin/items/{id}', [AdminController::class, 'updateItem'])->name('admin.items.update');
-
 Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
 
 Route::get('/generate-qrcode', 'QrCodeController@generate');
 Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
+
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ItemController;

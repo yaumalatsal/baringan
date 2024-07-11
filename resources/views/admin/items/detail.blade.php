@@ -28,13 +28,13 @@
                         {{ QrCode::size(100)->generate(url('/admin/items/' . $item->id)) }}
                     </div>
 
-                    {{-- <div class="col-12">
+                    <div class="col-12 mt-4">
                         <form action="{{ route('download.qrcode') }}" method="post">
                             @csrf
-                            <input type="hidden" name="url" value="{{ url('/items/' . $item->id) }}">
+                            <input type="hidden" name="url" value="{{ url('/admin/items/' . $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-block">Download QR Code</button>
                         </form>
-                    </div> --}}
+                    </div>
                 </div>
                 <!-- /.card -->
 
