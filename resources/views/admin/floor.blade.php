@@ -3,22 +3,22 @@
 
 @section('content')
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
-        <h3>List Lantai </h3>
+        <h3>List Ruangan {{ $lantai->name }}</h3>
     </div>
     <div class="row">
-        @foreach ($floors as $floor)
+        @foreach ($rooms as $room)
             <div class="col-lg-4 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{ $floor->name }}</h3>
+                        <h3>{{ $room->name }}</h3>
 
                         {{-- <p>New Orders</p> --}}
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{ route('admin.floors', $floor->id) }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         @endforeach

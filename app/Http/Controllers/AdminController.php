@@ -12,4 +12,15 @@ class AdminController extends Controller
         $floors = Floor::all();
         return view('admin.index', compact('floors'));
     }
+
+    public function floors($id)
+    {
+        // Ambil semua kamar yang terkait dengan lantai ini
+        $floors = Floor::all();
+
+        $lantai = Floor::find($id);
+        $rooms = $lantai->rooms;
+
+        return view('admin.floor', compact('floors', 'rooms', 'lantai'));
+    }
 }
