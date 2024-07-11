@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ItemController extends Controller
 {
@@ -24,6 +25,22 @@ class ItemController extends Controller
         return view('items.index', compact('items', 'room'));
     }
 
+public function downloadQrCode(Request $request)
+{
+    $url = $request->input('url');
+
+    // Generate QR Code
+    $qrCode = QrCode::format('png')->size(200)->generate($url);
+
+    // Set headers for file download
+    $headers = [
+        'Content-Type' => 'image/png',
+    ];
+
+    // Generate response for download
+    return response($qrCode, 200, $headers)->download('qr_code.png');
+}
+
 
     public function show(Item $item)
     {
@@ -38,7 +55,8 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         $item->update($request->all());
-        return redirect()->route('items.index')->with('success', 'Item updated successfully.');
+        return redirect()->route('rooms.items', ['room' => $item->room_id])
+            ->with('success', 'Item updated successfully.');
     }
 
     public function create(Room $room)
@@ -46,10 +64,21 @@ class ItemController extends Controller
         return view('items.create', compact('room'));
     }
 
-
     public function store(Request $request)
     {
-        Item::create($request->all());
-        return redirect()->route('items.index');
+        $item = Item::create($request->all());
+        return redirect()->route('rooms.items', ['room' => $item->room_id])
+            ->with('success', 'Item created successfully.');
     }
+
+
+    public function destroy(Item $item)
+{
+    $room_id = $item->room_id; // Simpan room_id sebelum menghapus item
+    $item->delete();
+    return redirect()->route('rooms.items', ['room' => $room_id])
+        ->with('success', 'Item deleted successfully');
+}
+
+
 }
