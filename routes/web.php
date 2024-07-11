@@ -53,3 +53,15 @@ Route::put('/items/{item}', 'App\Http\Controllers\ItemController@update')->name(
 Route::post('/download-qrcode', 'App\Http\Controllers\ItemController@downloadQrCode')->name('download.qrcode');
 
 Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
+
+// routes/web.php
+
+use App\Http\Controllers\RoomsController;
+
+Route::get('/floors/{floor}/rooms', [RoomController::class, 'index'])->name('floors.rooms.index');
+Route::get('/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
+Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
+Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
+Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
+Route::put('/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
+Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
