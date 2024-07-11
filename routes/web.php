@@ -20,6 +20,7 @@ Route::middleware([
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/floors/{id}', [AdminController::class, 'floors'])->name('admin.floors');
+Route::get('/admin/rooms/{id}', [AdminController::class, 'rooms'])->name('admin.rooms');
 
 Route::get('/generate-qrcode', 'QrCodeController@generate');
 Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);

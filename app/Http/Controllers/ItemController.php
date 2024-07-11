@@ -10,20 +10,20 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class ItemController extends Controller
 {
     public function index(Room $room)
-{
-    // Menggunakan eager loading untuk memuat relasi items
-    $room = Room::with('items')->find($room->id);
+    {
+        // Menggunakan eager loading untuk memuat relasi items
+        $room = Room::with('items')->find($room->id);
 
-    // Mengecek apakah room ditemukan
-    if (!$room) {
-        abort(404); // Jika room tidak ditemukan, tampilkan 404 error
+        // Mengecek apakah room ditemukan
+        if (!$room) {
+            abort(404); // Jika room tidak ditemukan, tampilkan 404 error
+        }
+
+        // Mengambil semua items yang terkait dengan room
+        $items = $room->items;
+
+        return view('items.index', compact('items', 'room'));
     }
-
-    // Mengambil semua items yang terkait dengan room
-    $items = $room->items;
-
-    return view('items.index', compact('items', 'room'));
-}
 
 public function downloadQrCode(Request $request)
 {
@@ -62,7 +62,7 @@ public function downloadQrCode(Request $request)
     {
         return view('items.create', compact('room'));
     }
-    
+
 
     public function store(Request $request)
     {
