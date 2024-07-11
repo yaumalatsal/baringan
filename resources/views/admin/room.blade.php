@@ -4,8 +4,9 @@
 @section('content')
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
         <h3>List Barang </h3>
+        <a href="" class="btn btn-block btn-success w-auto">Add Items</a>
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -35,6 +36,7 @@
                                 <th>Kondisi</th>
                                 <th>Tanggal Masuk</th>
                                 <th>Tanggal Cek</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,29 +49,16 @@
                                     <td>{{ $item->condition }}</td>
                                     <td>{{ $item->entry_date }}</td>
                                     <td>{{ $item->last_checked_date }}</td>
+                                    <td>
+                                        <div class="flex">
+                                            <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-primary">View</a>
+                                            <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-block btn-warning">Edit</a>
+                                            <a href="" class="btn btn-block btn-danger">Delete</a>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
-                            {{-- <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-warning">Pending</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-primary">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-danger">Denied</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr> --}}
+                           
                         </tbody>
                     </table>
                 </div>
