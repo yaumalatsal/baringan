@@ -26,12 +26,21 @@
                                 @endforeach
                             </select>
                         </div>
-                
 
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" placeholder="Enter name"
                                 name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Status</label>
+                            {{-- <div class="d-flex flex-column align-items-start"> --}}
+                                <input type="checkbox" name="status" id="status" checked data-bootstrap-switch >
+                                {{-- <input type="checkbox" class="form-check-input" id="status" name="status" > --}}
+                            {{-- </div> --}}
+                            {{-- <input type="checkbox" name="status" checked data-bootstrap-switch> --}}
+                            {{-- <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success"> --}}
                         </div>
 
                     </div>

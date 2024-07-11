@@ -10,16 +10,17 @@
         @foreach ($rooms as $room)
             <div class="col-lg-4 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $room->name }}</h3>
-
-                        {{-- <p>New Orders</p> --}}
+                <div class="small-box bg-info w-full">
+                    <div class="inner w-full text-left">
+                        <h4 class="font-weight-bold">{{ $room->name }}</h4>
+                        
+                        <p class="w-full d-flex justify-content-end">{{ $room->status ? 'Siap' : 'Belum Siap'}}<i class="fas fa-solid fa-circle {{ $room->status ? 'text-success' : 'text-danger'}}"></i></p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
                     <a href="{{ route('admin.rooms', $room->id) }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.rooms.edit', $room->id) }}" class="small-box-footer">Edit  <i class="fas fa-solid fa-pen"></i></a>
                 </div>
             </div>
         @endforeach

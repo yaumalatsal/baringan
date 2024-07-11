@@ -39,8 +39,10 @@ Route::middleware([
     Route::put('/admin/floors/{id}', [AdminController::class, 'updateFloor'])->name('admin.floors.update');
 
     // room
-    Route::get('/admin/rooms', [AdminController::class, 'createroom'])->name('admin.rooms.create');
-    Route::post('/admin/rooms', [AdminController::class, 'storeroom'])->name('admin.rooms.store');
+    Route::get('/admin/rooms', [AdminController::class, 'createRoom'])->name('admin.rooms.create');
+    Route::post('/admin/rooms', [AdminController::class, 'storeRoom'])->name('admin.rooms.store');
+    Route::get('/admin/rooms/{id}/edit', [AdminController::class, 'editRoom'])->name('admin.rooms.edit');
+    Route::put('/admin/roomrs/{id}', [AdminController::class, 'updateRoom'])->name('admin.rooms.update');
 });
 Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
 

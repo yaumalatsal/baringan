@@ -232,6 +232,7 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'floor_id' => 'required',
             'name' => 'required',
+            'status' => 'required',
         ]);
 
         Room::create($validatedData);
