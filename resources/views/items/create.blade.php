@@ -21,20 +21,20 @@
                 <input type="text" name="code" id="code" class="form-control" required>
             </div>
             <div class="form-group">
+                <label for="floor_id">Floor ID</label>
+                <input type="text" name="floor_id" id="floor_id" class="form-control" value="{{ $room->floor_id }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="room_id">Room ID</label>
+                <input type="text" name="room_id" id="room_id" class="form-control" value="{{ $room->id }}" readonly>
+            </div>
+            <div class="form-group">
                 <label for="entry_date">Entry Date</label>
                 <input type="date" name="entry_date" id="entry_date" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="last_checked_date">Last Checked Date</label>
                 <input type="date" name="last_checked_date" id="last_checked_date" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="floor_id">Floor ID</label>
-                <input type="text" name="floor_id" id="floor_id" class="form-control" value="{{ "Lantai ".$room->floor_id }}" readonly>
-            </div>
-            <div class="form-group">
-                <label for="room_id">Room ID</label>
-                <input type="text" name="room_id" id="room_id" class="form-control" value="{{ $room->name }}" readonly>
             </div>
             <div class="form-group">
                 <label for="item_condition">Condition</label>
