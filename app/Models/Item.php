@@ -19,5 +19,10 @@ class Item extends Model
  
     ];
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
     // Rest of your model code...
 }

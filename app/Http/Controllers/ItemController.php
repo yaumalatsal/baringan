@@ -61,15 +61,40 @@ public function downloadQrCode(Request $request)
 
     public function create(Room $room)
     {
+        $rooms = Room::all();
         return view('items.create', compact('room'));
     }
 
     public function store(Request $request)
-    {
-        $item = Item::create($request->all());
-        return redirect()->route('rooms.items', ['room' => $item->room_id])
-            ->with('success', 'Item created successfully.');
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'code' => 'required|string|max:50',
+        'entry_date' => 'required|date',
+        'last_checked_date' => 'required|date',
+        'item_condition' => 'required|string|max:255',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
+        'room_id' => 'required|exists:rooms,id', // Pastikan room_id valid
+        'floor_id' => 'required|exists:floors,id', // Pastikan floor_id valid
+    ]);
+
+    // Proses menyimpan gambar
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/images', $imageName); // Simpan gambar di storage/images
+
+        // Buat record item dengan menyertakan nama gambar
+        $item = Item::create(array_merge($validatedData, ['image' => $imageName]));
+    } else {
+        // Jika tidak ada gambar diunggah
+        $item = Item::create($validatedData);
     }
+
+    return redirect()->route('rooms.items', ['room' => $item->room_id])
+        ->with('success', 'Item created successfully.');
+}
+
 
 
     public function destroy(Item $item)
