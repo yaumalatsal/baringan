@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    use HasFactory;
-    
+    protected $fillable = [
+        'room_id',
+        'name',
+        'code',
+        'entry_date',
+        'last_checked_date',
+        'item_condition',
+ 
+    ];
+
+    // Rest of your model code...
 }

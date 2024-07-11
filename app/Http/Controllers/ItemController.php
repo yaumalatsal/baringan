@@ -41,10 +41,11 @@ class ItemController extends Controller
         return redirect()->route('items.index');
     }
 
-    public function create()
+    public function create(Room $room)
     {
-        return view('items.create');
+        return view('items.create', compact('room'));
     }
+    
 
     public function store(Request $request)
     {

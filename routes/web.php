@@ -32,3 +32,6 @@ Route::get('/rooms/{room}/items', [ItemController::class, 'index']);
 Route::get('/items/{item}', [ItemController::class, 'show']);
 Route::resource('items', ItemController::class);
 
+Route::get('/rooms/{room}/items/create', 'App\Http\Controllers\ItemController@create')->name('items.create');
+
+

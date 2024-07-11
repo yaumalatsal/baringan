@@ -28,7 +28,7 @@
                     <td>{{ $item->code }}</td>
                     <td>{{ $item->entry_date }}</td>
                     <td>{{ $item->last_checked_date }}</td>
-                    <td>{{ $item->condition }}</td>
+                    <td>{{ $item->item_condition }}</td>
                     <td>
                         <a href="{{ url('/items/' . $item->id) }}">View</a>
                         <a href="{{ url('/items/' . $item->id . '/edit') }}">Edit</a>
@@ -42,6 +42,7 @@
             
         </tbody>
     </table>
-    <a href="{{ url('/items/create') }}">Add New Item</a>
+    <a href="{{ route('items.create', ['room' => $room->id]) }}">Add New Item</a>
+
 </body>
 </html>
