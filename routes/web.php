@@ -7,7 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -17,7 +16,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-=======
 Route::get('/generate-qrcode', 'QrCodeController@generate');
 Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
->>>>>>> d91437b764adbe63cd9b9f9297107f6c60beedd2
