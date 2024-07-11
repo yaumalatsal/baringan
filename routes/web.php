@@ -18,3 +18,18 @@ Route::middleware([
 });
 Route::get('/generate-qrcode', 'QrCodeController@generate');
 Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
+use App\Http\Controllers\FloorController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ItemController;
+
+Route::get('/floors', [FloorController::class, 'index']);
+Route::get('/floors/{floor}/rooms', [RoomController::class, 'index']);
+
+
+Route::get('/floors/{floor}/rooms', [FloorController::class, 'rooms'])->name('floor.rooms');
+
+
+Route::get('/rooms/{room}/items', [ItemController::class, 'index']);
+Route::get('/items/{item}', [ItemController::class, 'show']);
+Route::resource('items', ItemController::class);
+
