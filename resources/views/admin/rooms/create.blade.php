@@ -34,13 +34,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Status</label>
-                            {{-- <div class="d-flex flex-column align-items-start"> --}}
-                                <input type="checkbox" name="status" id="status" checked data-bootstrap-switch >
-                                {{-- <input type="checkbox" class="form-check-input" id="status" name="status" > --}}
-                            {{-- </div> --}}
-                            {{-- <input type="checkbox" name="status" checked data-bootstrap-switch> --}}
-                            {{-- <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success"> --}}
+                            <label for="status">Status</label>
+                            <input type="hidden" name="status" value="0"> <!-- Hidden input default value -->
+                            <input type="checkbox" name="status" id="status" value="1" data-bootstrap-switch>
                         </div>
 
                     </div>
@@ -55,4 +51,14 @@
 
         </div>
     </div>
+    <script>
+        $(function () {
+            $("input[data-bootstrap-switch]").each(function(){
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+                $(this).on('switchChange.bootstrapSwitch', function(event, state) {
+                    $(this).val(state ? 1 : 0);
+                });
+            });
+        });
+    </script>
 @endsection
