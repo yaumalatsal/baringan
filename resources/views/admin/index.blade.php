@@ -20,6 +20,7 @@
                         <i class="ion ion-bag"></i>
                     </div>
                     <a href="{{ route('admin.floors', $floor->id) }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.floors.edit', $floor->id) }}" class="small-box-footer">Edit  <i class="fas fa-solid fa-pen"></i></a>
                 </div>
             </div>
         @endforeach

@@ -35,7 +35,7 @@ Route::middleware([
     // floor
     Route::get('/admin/floors', [AdminController::class, 'createFloor'])->name('admin.floors.create');
     Route::post('/admin/floors', [AdminController::class, 'storeFloor'])->name('admin.floors.store');
-    Route::post('/admin/floors/{id}', [AdminController::class, 'editFloor'])->name('admin.floors.edit');
+    Route::get('/admin/floors/{id}/edit', [AdminController::class, 'editFloor'])->name('admin.floors.edit');
     Route::put('/admin/floors/{id}', [AdminController::class, 'updateFloor'])->name('admin.floors.update');
 
     // room

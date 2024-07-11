@@ -218,7 +218,7 @@ class AdminController extends Controller
     }
 
 
-    // floor
+    // room
     public function createRoom()
     {
         $floors = Floor::all();
