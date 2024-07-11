@@ -18,20 +18,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($items as $item)
-                <tr>
-                    <td><img src="{{ QrCode::size(50)->generate(url('/items/' . $item->id)) }}" alt="QR Code"></td>
-                    <td><img src="{{ asset('path/to/image/' . $item->image) }}" alt="{{ $item->name }}"></td>
-                    <td>{{ $item->code }}</td>
-                    <td>{{ $item->entry_date }}</td>
-                    <td>{{ $item->last_checked_date }}</td>
-                    <td>{{ $item->condition }}</td>
-                    <td>
-                        <a href="{{ url('/items/' . $item->id) }}">View</a>
-                        <a href="{{ url('/items/' . $item->id . '/edit') }}">Edit</a>
-                    </td>
-                </tr>
-            @endforeach
+            @if($items && $items->count() > 0)
+    <h1>Items in Room {{ $room->name }}</h1>
+    <ul>
+        @foreach($items as $item)
+            <li>{{ $item->name }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>No items found in this room.</p>
+@endif
+
         </tbody>
     </table>
     <a href="{{ url('/items/create') }}">Add New Item</a>
