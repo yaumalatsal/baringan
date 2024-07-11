@@ -38,7 +38,7 @@ class ItemController extends Controller
     public function update(Request $request, Item $item)
     {
         $item->update($request->all());
-        return redirect()->route('items.index');
+        return redirect()->route('items.index')->with('success', 'Item updated successfully.');
     }
 
     public function create(Room $room)
