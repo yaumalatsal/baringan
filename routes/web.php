@@ -42,3 +42,6 @@ Route::get('/rooms/{room}/items/create', 'App\Http\Controllers\ItemController@cr
 
 Route::get('/items/{item}/edit', 'App\Http\Controllers\ItemController@edit')->name('items.edit');
 Route::put('/items/{item}', 'App\Http\Controllers\ItemController@update')->name('items.update');
+
+// routes/web.php
+Route::post('/download-qrcode', 'App\Http\Controllers\ItemController@downloadQrCode')->name('download.qrcode');

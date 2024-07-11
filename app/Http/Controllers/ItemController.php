@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ItemController extends Controller
 {
@@ -22,6 +23,22 @@ class ItemController extends Controller
     $items = $room->items;
 
     return view('items.index', compact('items', 'room'));
+}
+
+public function downloadQrCode(Request $request)
+{
+    $url = $request->input('url');
+
+    // Generate QR Code
+    $qrCode = QrCode::format('png')->size(200)->generate($url);
+
+    // Set headers for file download
+    $headers = [
+        'Content-Type' => 'image/png',
+    ];
+
+    // Generate response for download
+    return response($qrCode, 200, $headers)->download('qr_code.png');
 }
 
 

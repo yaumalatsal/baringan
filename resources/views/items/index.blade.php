@@ -10,6 +10,7 @@
             <tr>
                 <th>QR Code</th>
                 <th>Image</th>
+                <th>    Nama Baranf</th>
                 <th>Code</th>
                 <th>Entry Date</th>
                 <th>Last Checked Date</th>
@@ -24,7 +25,8 @@
         @foreach($items as $item)
                 <tr>
                     <td><img src="{{ QrCode::size(50)->generate(url('/items/' . $item->id)) }}" alt="QR Code"></td>
-                    <td><img src="{{ asset('path/to/image/' . $item->image) }}" alt="{{ $item->name }}"></td>
+                    <td><img src="{{ asset('path/to/image/') }}" alt="{{ $item->name }}"></td>
+                    <td>{{ $item->name }}</td>
                     <td>{{ $item->code }}</td>
                     <td>{{ $item->entry_date }}</td>
                     <td>{{ $item->last_checked_date }}</td>
