@@ -13,10 +13,10 @@ class FloorController extends Controller
     }
 
     public function rooms($floor)
-{
-    $floor = Floor::findOrFail($floor); // Cari lantai berdasarkan ID atau sesuaikan dengan parameter yang Anda gunakan
-    $rooms = $floor->rooms; // Ambil daftar kamar dari lantai yang ditemukan
-    return view('floors.rooms', compact('floor', 'rooms'));
-}
+    {
+        $floor = Floor::findOrFail($floor); // Cari lantai berdasarkan ID atau sesuaikan dengan parameter yang Anda gunakan
+        $rooms = $floor->rooms; // Ambil daftar kamar dari lantai yang ditemukan
+        return view('floors.rooms', compact('floor', 'rooms'));
+    }
 
 }
