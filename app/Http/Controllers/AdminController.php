@@ -217,6 +217,32 @@ class AdminController extends Controller
             ->with('success', 'Floor updated successfully.');
     }
 
+    public function destroyFloor($id)
+    {
+        $floor = Floor::findOrFail($id);
+
+        // Loop through each room of the floor
+        foreach ($floor->rooms as $room) {
+            // Loop through each item of the room
+            foreach ($room->items as $item) {
+                // Delete the item's image if it exists
+                if ($item->image) {
+                    Storage::delete('public/images/' . $item->image);
+                }
+                // Delete the item
+                $item->delete();
+            }
+            // Delete the room
+            $room->delete();
+        }
+
+        // Finally, delete the floor
+        $floor->delete();
+
+        return redirect()->route('admin')
+            ->with('success', 'Floor and related rooms and items deleted successfully.');
+    }
+
 
     // room
     public function createRoom()
@@ -239,6 +265,51 @@ class AdminController extends Controller
 
         return redirect()->route('admin.floors', ['id' => $request->floor_id])
             ->with('success', 'Item deleted successfully.');
+    }
+
+    public function editRoom($id)
+    {
+        $floors = Floor::all();
+        $room = Room::find($id);
+
+        return view('admin.rooms.edit', compact('floors', 'room'));
+    }
+
+    public function updateRoom(Request $request, $id)
+    {
+        $floors = Floor::all();
+        $validatedData = $request->validate([
+            'floor_id' => 'required',
+            'name' => 'required',
+            'status' => 'required',
+        ]);
+        $room = Room::findOrFail($id);
+        $room->update($validatedData);
+
+        return redirect()->route('admin.floors', ['id' => $room->floor_id])
+            ->with('success', 'Item deleted successfully.');
+    }
+
+    public function destroyRoom($id)
+    {
+        $room = Room::findOrFail($id);
+        $floor_id = $room->floor_id;
+
+        // Loop through each item of the room
+        foreach ($room->items as $item) {
+            // Delete the item's image if it exists
+            if ($item->image) {
+                Storage::delete('public/images/' . $item->image);
+            }
+            // Delete the item
+            $item->delete();
+        }
+
+        // Finally, delete the room
+        $room->delete();
+
+        return redirect()->route('admin.floors', ['id' => $room->floor_id])
+            ->with('success', 'Room and related items deleted successfully.');
     }
 
 }

@@ -4,6 +4,11 @@
 @section('content')
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
         <h3>Edit Lantai</h3>
+        <form action="{{ route('admin.floors.delete', $floor->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirmDelete(this);">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-block btn-danger">Hapus Lantai</button>
+        </form>
     </div>
     <div class="row">
         <div class="col-md-6 mx-auto">

@@ -3,5 +3,5 @@
         <img src="{{ asset('logo/logo-only.png') }}" alt="Logo" style="width: 128px">
     </a>
     
-    <h3 class="text-3xl font-bold mt-4">Barcode Inventory Ruangan</h3>
+    <h3 class="text-3xl font-bold mt-4">Kesiapan Inventaris Ruangan</h3>
 </div>

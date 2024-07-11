@@ -36,7 +36,7 @@
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->condition }}</td>
                                     <td>{{ $item->entry_date }}</td>
-                                    <td>{{ $item->last_checked_date }}</td>
+                                    <td>{{ $item->updated_at->format('F j, Y, g:i a') }}</td>
                                     <td>
                                         <div class="flex">
                                             <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-primary">View</a>
