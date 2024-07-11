@@ -41,12 +41,12 @@
         }
 
         .badge-success {
-            background-color: green;
+            background-color: rgb(55, 158, 55);
             color: white;
         }
 
         .badge-danger {
-            background-color: red;
+            background-color: rgb(182, 51, 51);
             color: white;
         }
     </style>
