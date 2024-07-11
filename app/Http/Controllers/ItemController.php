@@ -55,7 +55,8 @@ public function downloadQrCode(Request $request)
     public function update(Request $request, Item $item)
     {
         $item->update($request->all());
-        return redirect()->route('items.index')->with('success', 'Item updated successfully.');
+        return redirect()->route('rooms.items', ['room' => $item->room_id])
+            ->with('success', 'Item updated successfully.');
     }
 
     public function create(Room $room)
@@ -63,10 +64,21 @@ public function downloadQrCode(Request $request)
         return view('items.create', compact('room'));
     }
 
-
     public function store(Request $request)
     {
-        Item::create($request->all());
-        return redirect()->route('items.index');
+        $item = Item::create($request->all());
+        return redirect()->route('rooms.items', ['room' => $item->room_id])
+            ->with('success', 'Item created successfully.');
     }
+
+
+    public function destroy(Item $item)
+{
+    $room_id = $item->room_id; // Simpan room_id sebelum menghapus item
+    $item->delete();
+    return redirect()->route('rooms.items', ['room' => $room_id])
+        ->with('success', 'Item deleted successfully');
+}
+
+
 }
