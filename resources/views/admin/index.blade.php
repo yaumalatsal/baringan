@@ -29,27 +29,6 @@
         <h3>Status Kamar </h3>
     </div>
 
-    <style>
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            font-size: 1rem;
-        }
-
-        .badge-success {
-            background-color: green;
-            color: white;
-        }
-
-        .badge-danger {
-            background-color: red;
-            color: white;
-        }
-    </style>
 
     <div class="row">
         @foreach ($floors as $floor)

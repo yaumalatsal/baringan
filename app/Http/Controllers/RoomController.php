@@ -22,14 +22,20 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'floor_id' => 'required',
-            'name' => 'required',
+        $request->validate([
+            'floor_id' => 'required|integer',
+            'name' => 'required|string|max:255',
         ]);
 
-        Room::create($validatedData);
+        $status = $request->has('status') ? 1 : 0; // menangani checkbox
 
-        return redirect()->route('rooms.index')
+        Room::create([
+            'floor_id' => $request->input('floor_id'),
+            'name' => $request->input('name'),
+            'status' => $status,
+        ]);
+
+        return redirect()->route('admin.rooms.index')
             ->with('success', 'Room created successfully.');
     }
 
