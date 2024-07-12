@@ -1,8 +1,34 @@
 @extends('admin.layouts.app')
 
-
 @section('content')
-    <div class=" container-fluid d-flex justify-content-between fw-bold pt-4 mb-4">
+<style>
+    .status-icon {
+        font-size: em;
+        border: 8px solid rgb(0, 0, 0);
+        border-radius: 50%;
+        margin-left: 8px;
+    }
+    
+
+    .status-text {
+        font-weight: bold;
+
+        text-align: right;
+        width: 100%;
+        margin-top: 3px;
+    }
+    .status-success {
+        color: rgb(0, 255, 0);
+    }
+
+    .status-danger {
+        color: red;
+    }
+
+    
+</style>
+
+    <div class="container-fluid d-flex justify-content-between fw-bold pt-4 mb-4">
         <h3>List Ruangan {{ $lantai->name }}</h3>
         <a href="{{ route('admin.rooms.create') }}" class="btn btn-block btn-success w-auto">Add Kamar</a>
     </div>
@@ -14,7 +40,10 @@
                     <div class="inner w-full text-left">
                         <h4 class="font-weight-bold">{{ $room->name }}</h4>
                         
-                        <p class="w-full d-flex justify-content-end">{{ $room->status ? 'Siap' : 'Belum Siap'}}<i class="fas fa-solid fa-circle {{ $room->status ? 'text-success' : 'text-danger'}}"></i></p>
+                        <p class="w-full d-flex justify-content-end">
+                            <span class="status-text">{{ $room->status ? 'Siap' : 'Belum Siap'}}</span>
+                            <i class="fas fa-circle status-icon {{ $room->status ? 'status-success' : 'status-danger'}}"></i>
+                        </p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
