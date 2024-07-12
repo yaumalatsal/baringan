@@ -25,7 +25,7 @@ Route::middleware([
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/floors/{id}', [AdminController::class, 'floors'])->name('admin.floors');
     Route::get('/admin/rooms/{id}', [AdminController::class, 'rooms'])->name('admin.rooms');
-    Route::get('/admin/items/{id}', [AdminController::class, 'items'])->name('admin.items');
+    
     Route::get('/admin/items', [AdminController::class, 'createItem'])->name('admin.items.create');
     Route::post('/admin/items', [AdminController::class, 'storeItem'])->name('admin.items.store');
     Route::get('/admin/items/{id}/edit', [AdminController::class, 'editItem'])->name('admin.items.edit');
@@ -46,6 +46,7 @@ Route::middleware([
     Route::put('/admin/rooms/{id}', [AdminController::class, 'updateRoom'])->name('admin.rooms.update');
     Route::delete('/admin/rooms/{id}', [AdminController::class, 'destroyRoom'])->name('admin.rooms.delete');
 });
+Route::get('/admin/items/{id}', [AdminController::class, 'items'])->name('admin.items');
 Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
 
 Route::get('/generate-qrcode', 'QrCodeController@generate');
