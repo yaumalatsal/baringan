@@ -29,8 +29,13 @@
                         </div>
                         <div class="form-group">
                             <label for="condition">Kondisi</label>
-                            <input type="text" class="form-control" id="condition" placeholder="Enter condition"
-                                name="condition">
+                            {{-- <input type="text" class="form-control" id="condition" placeholder="Enter condition"
+                                name="condition"> --}}
+                            <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition">
+                                <option value="">Select Kondisi</option>
+                                <option value="BAIK">BAIK</option>
+                                <option value="RUSAK">RUSAK</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="entry_date">Entry Date:</label>
@@ -56,7 +61,7 @@
                                 @endforeach
                             </select>
                         </div>
-                
+
                         <div class="form-group">
                             <label>Room</label>
                             <select id="room" class="form-control select2bs4" style="width: 100%;" name="room_id">
@@ -90,6 +95,4 @@
 
         </div>
     </div>
-
-    
 @endsection

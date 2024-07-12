@@ -155,7 +155,6 @@ class AdminController extends Controller
         return redirect()->route('admin.rooms', $item->room_id)
             ->with('success', 'Item updated successfully.');
 
-        return view('admin.items.edit', compact('floors', 'item'));
     }
     public function destroyItem($id)
     {

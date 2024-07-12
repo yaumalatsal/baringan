@@ -28,7 +28,12 @@
                         </div>
                         <div class="form-group">
                             <label for="condition">Condition</label>
-                            <input type="text" class="form-control" id="condition" name="condition" value="{{ $item->condition }}">
+                            {{-- <input type="text" class="form-control" id="condition" name="condition" value="{{ $item->condition }}"> --}}
+                            <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition">
+                                <option value="">Select Kondisi</option>
+                                <option value="BAIK" {{ $item->condition == "BAIK" ? 'selected' : '' }}>BAIK</option>
+                                <option value="RUSAK" {{ $item->condition == "RUSAK" ? 'selected' : '' }}>RUSAK</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="entry_date">Entry Date:</label>
