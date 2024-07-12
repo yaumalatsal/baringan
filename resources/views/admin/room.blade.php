@@ -4,7 +4,7 @@
 @section('content')
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
         <h3>List Barang </h3>
-        <a href="{{ route('admin.items.create') }}" class="btn btn-block btn-success w-auto">Add Items</a>
+        <a href="{{ route('admin.items.create', ['room_id' => $room->id]) }}" class="btn btn-block btn-success w-auto">Add Items</a>
     </div>
     <div class="row mt-4">
         <div class="col-12">

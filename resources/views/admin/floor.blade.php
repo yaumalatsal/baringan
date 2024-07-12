@@ -4,7 +4,7 @@
 @section('content')
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4 mb-4">
         <h3>List Ruangan {{ $lantai->name }}</h3>
-        <a href="{{ route('admin.rooms.create') }}" class="btn btn-block btn-success w-auto">Add Kamar</a>
+        <a href="{{ route('admin.rooms.create',['floor_id' => $lantai->id]) }}" class="btn btn-block btn-success w-auto">Add Kamar</a>
     </div>
     <div class="row">
         @foreach ($rooms as $room)
