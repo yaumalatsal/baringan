@@ -11,6 +11,7 @@ class Item extends Model
         'room_id',
         'floor_id',
         'name',
+        'merk',
         'code',
         'entry_date',
         'last_checked_date',

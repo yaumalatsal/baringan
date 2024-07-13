@@ -4,7 +4,8 @@
 @section('content')
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
         <h3>Edit Room</h3>
-        <form action="{{ route('admin.rooms.delete', $room->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirmDelete(this);">
+        <form action="{{ route('admin.rooms.delete', $room->id) }}" method="POST" style="display:inline-block;"
+            onsubmit="return confirmDelete(this);">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-block btn-danger">Hapus Room</button>
@@ -27,9 +28,10 @@
                         <div class="form-group">
                             <label>Floor</label>
                             <select id="floor" class="form-control select2bs4" style="width: 100%;" name="floor_id">
-                                    <option value="">Select Floor</option>
+                                <option value="">Select Floor</option>
                                 @foreach ($floors as $floor)
-                                    <option value="{{ $floor->id }}">{{ $floor->name }}</option>
+                                    <option value="{{ $floor->id }}" {{ $room->floor_id == $floor->id ? 'selected' : '' }}>
+                                        {{ $floor->name }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -57,7 +57,8 @@
                             <select id="floor" class="form-control select2bs4" style="width: 100%;">
                                 <option value="">Select Floor</option>
                                 @foreach ($floors as $floor)
-                                    <option value="{{ $floor->id }}">{{ $floor->name }}</option>
+                                    <option value="{{ $floor->id }}" {{ $room->floor_id == $floor->id ? 'selected' : '' }}>
+                                        {{ $floor->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -66,6 +67,9 @@
                             <label>Room</label>
                             <select id="room" class="form-control select2bs4" style="width: 100%;" name="room_id">
                                 <option value="">Select Room</option>
+                                @foreach ($rooms as $ruangan)
+                                    <option value="{{ $ruangan->id }}" {{ $ruangan->id == $room->id ? 'selected' : '' }}>{{ $ruangan->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

@@ -57,11 +57,15 @@ class AdminController extends Controller
         return view('admin.items.detail', compact('floors', 'item'));
     }
 
-    public function createItem(Room $room)
+    public function createItem(Request $request)
     {
         $floors = Floor::all();
+        $room_id = $request->query('room_id');
+        $room = Room::find($room_id);
+        $rooms = Room::where('floor_id', $room->floor_id)->get();
 
-        return view('admin.items.create', compact('floors'));
+
+        return view('admin.items.create', compact('floors', 'room_id', 'room', 'rooms'));
     }
 
     public function getRoomsByFloor($floorId)
@@ -174,7 +178,7 @@ class AdminController extends Controller
 
 
     // floor
-    public function createFloor()
+    public function createFloor(Request $request)
     {
         $floors = Floor::all();
 
@@ -244,11 +248,12 @@ class AdminController extends Controller
 
 
     // room
-    public function createRoom()
+    public function createRoom(Request $request)
     {
         $floors = Floor::all();
+        $floor_id = $request->query('floor_id');
 
-        return view('admin.rooms.create', compact('floors'));
+        return view('admin.rooms.create', compact('floors', 'floor_id'));
     }
 
     public function storeRoom(Request $request)
