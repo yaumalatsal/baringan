@@ -1,6 +1,14 @@
 @extends('admin.layouts.app')
 
+@php
+    use Carbon\Carbon;
 
+    // Set the locale to Indonesian
+    Carbon::setLocale('id');
+
+    // Format the date
+
+@endphp
 @section('content')
 @if (session('success'))
             <div class="alert alert-success">
@@ -41,7 +49,7 @@
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->condition }}</td>
                                     <td>{{ $item->merk }}</td>
-                                    <td>{{ $item->updated_at->format('F j, Y, g:i a') }}</td>
+                                    <td>{{ $formattedDateItem = Carbon::parse($item->updated_at)->translatedFormat('l, j F Y, H:i') }}</td>
                                     <td>
                                         <div class="flex">
                                             <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-primary">View</a>

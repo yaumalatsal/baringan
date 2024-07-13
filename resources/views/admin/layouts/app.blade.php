@@ -18,9 +18,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
+        rel="stylesheet">
 
-      <!-- Bootstrap4 Duallistbox -->
+    <!-- Bootstrap4 Duallistbox -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
     <!-- BS Stepper -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/bs-stepper/css/bs-stepper.min.css') }}">
@@ -30,6 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition sidebar-mini">
+    
     <div class="wrapper">
 
         @include('admin.layouts.navbar')
@@ -107,12 +109,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 if (floorId) {
                     $.ajax({
-                        url: '/floors/' + floorId ,
+                        url: '/floors/' + floorId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
                             $.each(data, function(key, room) {
-                                $roomSelect.append('<option value="' + room.id + '">' + room.name + '</option>');
+                                $roomSelect.append('<option value="' + room.id + '">' +
+                                    room.name + '</option>');
                             });
                         },
                         error: function(xhr, status, error) {
