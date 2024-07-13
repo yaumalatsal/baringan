@@ -19,7 +19,7 @@
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Nama Barang</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $item->name }}">
                         </div>
                         <div class="form-group">
@@ -31,10 +31,10 @@
                             <input type="text" class="form-control" id="merk" placeholder="Enter merk" name="merk" value="{{ $item->merk }}">
                         </div>
                         <div class="form-group">
-                            <label for="condition">Condition</label>
+                            <label for="condition">Kondisi</label>
                             {{-- <input type="text" class="form-control" id="condition" name="condition" value="{{ $item->condition }}"> --}}
                             <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition">
-                                <option value="">Select Kondisi</option>
+                                <option value="">Pilih Kondisi</option>
                                 <option value="BAIK" {{ $item->condition == "BAIK" ? 'selected' : '' }}>BAIK</option>
                                 <option value="RUSAK" {{ $item->condition == "RUSAK" ? 'selected' : '' }}>RUSAK</option>
                             </select>
@@ -49,7 +49,7 @@
                         </div> --}}
             
                         <div class="form-group">
-                            <label for="floor">Floor</label>
+                            <label for="floor">Lantai</label>
                             <select id="floor" name="floor_id" class="form-control select2bs4" style="width: 100%;">
                                 <option value="">Select Floor</option>
                                 @foreach ($floors as $floor)

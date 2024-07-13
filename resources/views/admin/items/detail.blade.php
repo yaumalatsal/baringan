@@ -1,9 +1,8 @@
 @extends('admin.layouts.app')
 
-
 @section('content')
-    <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
-        <h3>Detail Item</h3>
+    <div class="container-fluid d-flex justify-content-between fw-bold pt-4">
+        <h3>Detail Barang</h3>
         <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-block btn-warning w-auto">Edit Item</a>
     </div>
     <div class="row mt-4">
@@ -11,21 +10,19 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Detail Item</h3>
+                    <h3 class="card-title">Detail Barang</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <h1>{{ $item->name }}</h1>
                     <div class="item-image-wrapper">
-                        <img src="{{ $item->image ? asset('storage/images/' . $item->image) : asset('image/image-not-found.jpeg') }}" alt="{{ $item->name }}" class="img-fluid" >
+                        <img src="{{ $item->image ? asset('storage/images/' . $item->image) : asset('image/image-not-found.jpeg') }}" alt="{{ $item->name }}" class="img-fluid">
                     </div>
                     <p><strong>Code:</strong> {{ $item->code }}</p>
                     <p><strong>Merk:</strong> {{ $item->merk }}</p>
-                    {{-- <p><strong>Entry Date:</strong> {{ $item->entry_date }}</p> --}}
-                    <p><strong>Last Checked Date:</strong> {{ $item->updated_at }}</p>
-                    <p><strong>Condition:</strong> {{ $item->condition }}</p>
+                    <p><strong>Tanggal Terakhir Cek:</strong> {{ $item->updated_at }}</p>
+                    <p><strong>Kondisi Barang:</strong> {{ $item->condition }}</p>
                     <p><strong>Lantai:</strong> {{ $item->room->floor->name }}</p>
-                    {{-- <p><strong>Room:</strong> {{ $item->room->name }}</p> --}}
                     <div class="text-center">
                         {{ QrCode::size(100)->generate(url('/admin/items/' . $item->id)) }}
                     </div>
@@ -39,49 +36,43 @@
                     </div>
                 </div>
                 <!-- /.card -->
-
             </div>
         </div>
 
-        <div class="card card-primary mt-4 mx-auto  ">
-            <div class="card-header">
-                <h3 class="card-title">Item Logs</h3>
+        <div class="col-md-12 mt-4">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">History Pengecekan Barang</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive" style="max-height: 400px; overflow-y: auto;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Barang</th>
+                                <th>Code</th>
+                                <th>Merk</th>
+                                <th>Tanggal Cek</th>
+                                <th>Kondisi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($item->logs as $log)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $log->name }}</td>
+                                    <td>{{ $log->code }}</td>
+                                    <td>{{ $log->merk }}</td>
+                                    <td>{{ $log->created_at }}</td>
+                                    <td>{{ $log->condition }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Code</th>
-                            <th>Merk</th>
-                            
-                            <th>Last Checked Date</th>
-                            <th>Condition</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($item->logs as $log)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $log->name }}</td>
-                            <td>{{ $log->code }}</td>
-                            <td>{{ $log->merk }}</td>
-                            
-                            <td>{{ $log->created_at }}</td>
-                            <td>{{ $log->condition }}</td>
-                            {{-- <td>{{ $log->room->name }}</td> --}}
-                            {{-- <td>{{ $log->room->floor->name }}</td> --}}
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            <!-- /.card -->
         </div>
-        <!-- /.card -->
     </div>
-</div>
-
-    @endsection
+@endsection

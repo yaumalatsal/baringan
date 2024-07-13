@@ -50,7 +50,7 @@
                         </div> --}}
 
                         <div class="form-group">
-                            <label>Floor</label>
+                            <label>Lantai</label>
                             <select id="floor" class="form-control select2bs4" style="width: 100%;">
                                 <option value="">Select Floor</option>
                                 @foreach ($floors as $floor)
