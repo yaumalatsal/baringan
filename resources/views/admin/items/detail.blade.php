@@ -6,7 +6,7 @@
         <h3>Detail Item</h3>
         <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-block btn-warning w-auto">Edit Item</a>
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-6 mx-auto">
             <!-- general form elements -->
             <div class="card card-primary">
