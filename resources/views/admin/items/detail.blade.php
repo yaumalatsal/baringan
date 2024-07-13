@@ -45,8 +45,8 @@
                     <h3 class="card-title">History Pengecekan Barang</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive" style="max-height: 400px; overflow-y: auto;">
-                    <table class="table table-bordered">
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -59,15 +59,16 @@
                         </thead>
                         <tbody>
                             @foreach($item->logs as $log)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $log->name }}</td>
-                                    <td>{{ $log->code }}</td>
-                                    <td>{{ $log->merk }}</td>
-                                    <td>{{ $log->created_at }}</td>
-                                    <td>{{ $log->condition }}</td>
-                                </tr>
-                            @endforeach
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $log->name }}</td>
+                                <td>{{ $log->code }}</td>
+                                <td>{{ $log->merk }}</td>
+                                <td>{{ $log->created_at }}</td>
+                                <td>{{ $log->condition }}</td>
+                            </tr>
+                        @endforeach
+                           
                         </tbody>
                     </table>
                 </div>

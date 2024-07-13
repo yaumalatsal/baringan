@@ -10,8 +10,8 @@
             <div class="col-lg-4 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $floor->name }}</h3>
+                    <div class="inner text-left ">
+                        <h4 class="font-weight-bold">{{ $floor->name }}</h4>
 
                         {{-- <p>New Orders</p> --}}
                     </div>
@@ -66,7 +66,7 @@
                         <tbody>
                             @foreach ($floor->rooms as $room)
                                 <tr>
-                                    <td>{{ $room->name }}</td>
+                                    <td><a href="{{ route('admin.rooms', $room->id) }}">{{ $room->name }}</a></td>
                                     <td class="text-center">
                                         @if ($room->status == 1)
                                             <span class="badge badge-success">✔</span>
