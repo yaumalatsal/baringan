@@ -25,7 +25,7 @@
                     <p><strong>Last Checked Date:</strong> {{ $item->updated_at }}</p>
                     <p><strong>Condition:</strong> {{ $item->condition }}</p>
                     <p><strong>Lantai:</strong> {{ $item->room->floor->name }}</p>
-                    <p><strong>Room:</strong> {{ $item->room->name }}</p>
+                    {{-- <p><strong>Room:</strong> {{ $item->room->name }}</p> --}}
                     <div class="text-center">
                         {{ QrCode::size(100)->generate(url('/admin/items/' . $item->id)) }}
                     </div>
@@ -42,4 +42,46 @@
 
             </div>
         </div>
+
+        <div class="card card-primary mt-4 mx-auto  ">
+            <div class="card-header">
+                <h3 class="card-title">Item Logs</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Merk</th>
+                            
+                            <th>Last Checked Date</th>
+                            <th>Condition</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($item->logs as $log)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $log->name }}</td>
+                            <td>{{ $log->code }}</td>
+                            <td>{{ $log->merk }}</td>
+                            
+                            <td>{{ $log->created_at }}</td>
+                            <td>{{ $log->condition }}</td>
+                            {{-- <td>{{ $log->room->name }}</td> --}}
+                            {{-- <td>{{ $log->room->floor->name }}</td> --}}
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
     @endsection

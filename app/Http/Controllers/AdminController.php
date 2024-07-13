@@ -53,7 +53,7 @@ class AdminController extends Controller
     {
         $floors = Floor::all();
 
-        $item = Item::with('room.floor')->find($id);
+        $item = Item::with('room.floor', 'logs')->find($id);
 
         return view('admin.items.detail', compact('floors', 'item'));
     }
