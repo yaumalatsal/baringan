@@ -22,7 +22,7 @@
                                 <th>nama</th>
                                 <th>Code</th>
                                 <th>Kondisi</th>
-                                <th>Merek</th>
+                                <th>Merk</th>
                                 <th>Tanggal Cek</th>
                                 <th>Action</th>
                             </tr>
@@ -35,17 +35,18 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->condition }}</td>
-                                    <td>{{ $item->merek }}</td>
+                                    <td>{{ $item->merk }}</td>
                                     <td>{{ $item->updated_at->format('F j, Y, g:i a') }}</td>
                                     <td>
                                         <div class="flex">
                                             <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-primary">View</a>
-                                            <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-blue">Tinjau</a>
+                                            <a href="http://139.255.11.206:8083/espbk" class="btn btn-block btn-info">Tinjau</a>
+
                                             <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-block btn-warning">Edit</a>
-                                            <form action="{{ route('admin.items.delete', $item->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirmDelete(this);">
+                                            <form action="{{ route('admin.items.delete', $item->id) }}" method="POST"  onsubmit="return confirmDelete(this);">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-block btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-block btn-danger mt-2">Delete</button>
                                             </form>
                                         </div>
                                     </td>

@@ -79,8 +79,9 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:50',
-            'entry_date' => 'required|date',
-            'last_checked_date' => 'required|date',
+            'merk' => 'required|string|max:250',
+            // 'entry_date' => 'required|date',
+            // 'last_checked_date' => 'required|date',
             'condition' => 'required|string|max:255',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:100000', // Validasi untuk gambar
             'room_id' => 'required|exists:rooms,id', // Pastikan room_id valid

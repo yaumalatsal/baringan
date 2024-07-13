@@ -27,6 +27,10 @@
                             <input type="text" class="form-control" id="code" name="code" value="{{ $item->code }}">
                         </div>
                         <div class="form-group">
+                            <label for="merk">Merk</label>
+                            <input type="text" class="form-control" id="merk" placeholder="Enter merk" name="merk">
+                        </div>
+                        <div class="form-group">
                             <label for="condition">Condition</label>
                             {{-- <input type="text" class="form-control" id="condition" name="condition" value="{{ $item->condition }}"> --}}
                             <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition">
@@ -35,14 +39,14 @@
                                 <option value="RUSAK" {{ $item->condition == "RUSAK" ? 'selected' : '' }}>RUSAK</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="entry_date">Entry Date:</label>
                             <input type="date" id="entry_date" class="form-control" name="entry_date" value="{{ $item->entry_date }}">
                         </div>
                         <div class="form-group">
                             <label for="last_checked_date">Last Checked Date:</label>
                             <input type="date" id="last_checked_date" class="form-control" name="last_checked_date" value="{{ $item->last_checked_date }}">
-                        </div>
+                        </div> --}}
             
                         <div class="form-group">
                             <label for="floor">Floor</label>

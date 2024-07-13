@@ -23,6 +23,10 @@
                                 name="name">
                         </div>
                         <div class="form-group">
+                            <label for="merk">Merk</label>
+                            <input type="text" class="form-control" id="merk" placeholder="Enter merk" name="merk">
+                        </div>
+                        <div class="form-group">
                             <label for="code">Code</label>
                             <input type="code" class="form-control" id="code" placeholder="Enter code"
                                 name="code">
@@ -37,20 +41,13 @@
                                 <option value="RUSAK">RUSAK</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="entry_date">Entry Date:</label>
-                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                <input type="date" id="entry_date" class="form-control datetimepicker-input"
-                                    data-target="#reservationdate" name="entry_date" />
-                            </div>
-                        </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="last_checked_date">Last Checked Date:</label>
                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                 <input type="date" id="last_checked_date" class="form-control datetimepicker-input"
                                     data-target="#reservationdate" name="last_checked_date" />
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label>Floor</label>
