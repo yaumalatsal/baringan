@@ -20,8 +20,9 @@
                         <img src="{{ $item->image ? asset('storage/images/' . $item->image) : asset('image/image-not-found.jpeg') }}" alt="{{ $item->name }}" class="img-fluid" >
                     </div>
                     <p><strong>Code:</strong> {{ $item->code }}</p>
-                    <p><strong>Entry Date:</strong> {{ $item->entry_date }}</p>
-                    <p><strong>Last Checked Date:</strong> {{ $item->last_checked_date }}</p>
+                    <p><strong>Merk:</strong> {{ $item->merk }}</p>
+                    {{-- <p><strong>Entry Date:</strong> {{ $item->entry_date }}</p> --}}
+                    <p><strong>Last Checked Date:</strong> {{ $item->updated_at }}</p>
                     <p><strong>Condition:</strong> {{ $item->condition }}</p>
                     <p><strong>Lantai:</strong> {{ $item->room->floor->name }}</p>
                     <p><strong>Room:</strong> {{ $item->room->name }}</p>
