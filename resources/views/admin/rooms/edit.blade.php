@@ -2,6 +2,15 @@
 
 
 @section('content')
+<!-- Bootstrap Switch CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap Switch JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
+
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
         <h3>Edit Room</h3>
         <form action="{{ route('admin.rooms.delete', $room->id) }}" method="POST" style="display:inline-block;"
@@ -44,6 +53,9 @@
 
                         <div class="form-group">
                             <label for="status">Status</label>
+                            <input type="hidden" name="status" value="{{ $room->status ? 1 : 0 }}"> <!-- Hidden input berdasarkan status dari database -->
+
+
                             <input type="hidden" name="status" value="0"> <!-- Hidden input default value -->
                             <input type="checkbox" name="status" id="status" value="1" data-bootstrap-switch
                                 {{ $room->status ? 'checked' : '' }}>
