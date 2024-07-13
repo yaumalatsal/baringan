@@ -22,7 +22,7 @@
                                 <th>nama</th>
                                 <th>Code</th>
                                 <th>Kondisi</th>
-                                <th>Tanggal Masuk</th>
+                                <th>Merek</th>
                                 <th>Tanggal Cek</th>
                                 <th>Action</th>
                             </tr>
@@ -35,11 +35,12 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->condition }}</td>
-                                    <td>{{ $item->entry_date }}</td>
+                                    <td>{{ $item->merek }}</td>
                                     <td>{{ $item->updated_at->format('F j, Y, g:i a') }}</td>
                                     <td>
                                         <div class="flex">
                                             <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-primary">View</a>
+                                            <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-blue">Tinjau</a>
                                             <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-block btn-warning">Edit</a>
                                             <form action="{{ route('admin.items.delete', $item->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirmDelete(this);">
                                                 @csrf
