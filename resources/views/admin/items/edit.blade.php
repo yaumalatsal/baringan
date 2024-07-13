@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label for="merk">Merk</label>
-                            <input type="text" class="form-control" id="merk" placeholder="Enter merk" name="merk">
+                            <input type="text" class="form-control" id="merk" placeholder="Enter merk" name="merk" value="{{ $item->merk }}">
                         </div>
                         <div class="form-group">
                             <label for="condition">Condition</label>

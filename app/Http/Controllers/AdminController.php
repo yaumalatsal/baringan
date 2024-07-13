@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Floor;
 use App\Models\Item;
+use App\Models\ItemLog;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -133,8 +134,9 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:50',
-            'entry_date' => 'required|date',
-            'last_checked_date' => 'required|date',
+            'merk' => 'required|string|max:250',
+            // 'entry_date' => 'required|date',
+            // 'last_checked_date' => 'required|date',
             'condition' => 'required|string|max:255',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:204800',
             'room_id' => 'required|exists:rooms,id',
@@ -155,6 +157,17 @@ class AdminController extends Controller
         } else {
             $item->update($validatedData);
         }
+
+        ItemLog::create([
+            'item_id' => $item->id,
+            'room_id' => $item->room_id,
+            'name' => $item->name,
+            'code' => $item->code,
+            'merk' => $item->merk,
+            // 'entry_date' => $item->entry_date,
+            // 'last_checked_date' => $item->last_checked_date,
+            'condition' => $item->condition,
+        ]);
 
         // Redirect with success message
         return redirect()->route('admin.rooms', $item->room_id)
