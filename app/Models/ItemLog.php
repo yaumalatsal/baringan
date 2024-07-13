@@ -5,30 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model
+class ItemLog extends Model
 {
+    use HasFactory;
     protected $fillable = [
+        'item_id',
         'room_id',
-        'floor_id',
         'name',
-        'merk',
         'code',
+        'merk',
         'entry_date',
         'last_checked_date',
         'condition',
-        'image'
- 
     ];
 
-    public function room()
+    public function item()
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsTo(Item::class);
     }
-
-    public function logs()
-    {
-        return $this->hasMany(ItemLog::class);
-    }
-
-    // Rest of your model code...
 }
