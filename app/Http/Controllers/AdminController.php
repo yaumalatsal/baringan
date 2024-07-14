@@ -282,7 +282,7 @@ class AdminController extends Controller
         Room::create($validatedData);
 
         return redirect()->route('admin.floors', ['id' => $request->floor_id])
-            ->with('success', 'Item deleted successfully.');
+            ->with('success', 'Room Created successfully.');
     }
 
     public function editRoom($id)
@@ -305,7 +305,7 @@ class AdminController extends Controller
         $room->update($validatedData);
 
         return redirect()->route('admin.floors', ['id' => $room->floor_id])
-            ->with('success', 'Item deleted successfully.');
+            ->with('success', 'Room Updated successfully.');
     }
 
     public function destroyRoom($id)
