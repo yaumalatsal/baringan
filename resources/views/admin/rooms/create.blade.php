@@ -40,6 +40,12 @@
                             <input type="checkbox" name="status" id="status" value="1" data-bootstrap-switch>
                         </div>
 
+                        <div class="form-group">
+                            <label for="patient">Patient</label>
+                            <input type="hidden" name="patient" value="0"> <!-- Hidden input default value -->
+                            <input type="checkbox" name="patient" id="patient" value="1" data-bootstrap-switch>
+                        </div>
+
                     </div>
                     <!-- /.card-body -->
 

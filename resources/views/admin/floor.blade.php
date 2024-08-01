@@ -40,11 +40,12 @@
         @foreach ($rooms as $room)
             <div class="col-lg-4 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info w-full">
+                <div class="small-box {{ $room->patient ? 'bg-info' : 'bg-warning'}} w-full">
                     <div class="inner w-full text-left">
                         <h4 class="font-weight-bold">{{ $room->name }}</h4>
                         
                         <p class="w-full d-flex justify-content-end">
+                            <span class="status-text">Status Kamar : </span>
                             <span class="status-text">{{ $room->status ? 'Siap' : 'Belum Siap'}}</span>
                             <i class="fas fa-circle status-icon {{ $room->status ? 'status-success' : 'status-danger'}}"></i>
                         </p>

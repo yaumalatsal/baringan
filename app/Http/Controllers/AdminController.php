@@ -24,7 +24,7 @@ class AdminController extends Controller
         $floors = Floor::all();
 
         $lantai = Floor::find($id);
-        $rooms = $lantai->rooms;
+        $rooms = $lantai->rooms->sortBy('name');
 
         return view('admin.floor', compact('floors', 'rooms', 'lantai'));
     }
@@ -277,6 +277,7 @@ class AdminController extends Controller
             'floor_id' => 'required',
             'name' => 'required',
             'status' => 'required',
+            'patient' => 'required',
         ]);
 
         Room::create($validatedData);
@@ -300,6 +301,7 @@ class AdminController extends Controller
             'floor_id' => 'required',
             'name' => 'required',
             'status' => 'required',
+            'patient' => 'required',
         ]);
         $room = Room::findOrFail($id);
         $room->update($validatedData);
