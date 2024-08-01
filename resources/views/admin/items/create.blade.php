@@ -39,6 +39,7 @@
                                 <option value="">Select Kondisi</option>
                                 <option value="BAIK">BAIK</option>
                                 <option value="RUSAK">RUSAK</option>
+                                <option value="TIDAK TERSEDIA">TIDAK TERSEDIA</option>
                             </select>
                         </div>
                         {{-- <div class="form-group">

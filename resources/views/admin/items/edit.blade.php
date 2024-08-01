@@ -37,6 +37,7 @@
                                 <option value="">Pilih Kondisi</option>
                                 <option value="BAIK" {{ $item->condition == "BAIK" ? 'selected' : '' }}>BAIK</option>
                                 <option value="RUSAK" {{ $item->condition == "RUSAK" ? 'selected' : '' }}>RUSAK</option>
+                                <option value="TIDAK TERSEDIA" {{ $item->condition == "TIDAK TERSEDIA" ? 'selected' : '' }}>TIDAK TERSEDIA</option>
                             </select>
                         </div>
                         {{-- <div class="form-group">
