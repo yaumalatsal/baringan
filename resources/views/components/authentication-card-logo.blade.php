@@ -3,5 +3,6 @@
         <img src="{{ asset('logo/logo-only.png') }}" alt="Logo" style="width: 128px">
     </a>
     
-    <h3 class="text-3xl font-bold mt-4">SITANGAN RSPG</h3>
+    <h3 class="text-3xl font-bold mt-4">Pengecekan Fasilitas Kamar Rawat Inap
+    </h3>
 </div>

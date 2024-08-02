@@ -43,7 +43,7 @@
                 </li>
         
                 <!-- Lantai Menu -->
-                <li class="nav-item menu-open">
+                <li class="nav-item {{ Request::is('admin') ? '' : 'menu-open' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -54,7 +54,7 @@
                     <ul class="nav nav-treeview">
                         @foreach ($floors as $floor)
                             <li class="nav-item">
-                                <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link">
+                                <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link {{ Request::route('id') == $floor->id ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ $floor->name }}</p>
                                 </a>
