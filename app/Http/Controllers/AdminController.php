@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\ItemLog;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,28 @@ class AdminController extends Controller
         $floors = Floor::all();
 
         $lantai = Floor::find($id);
-        $rooms = $lantai->rooms->sortBy('name');
+        // $rooms = $lantai->rooms->sortBy('name');
+        // $rooms = DB::table('rooms')
+        // ->select('*')
+        // ->where('floor_id',$id)
+        // ->orderBy(DB::raw('LENGTH(name), name'))
+        // ->get();
+        $rooms = $lantai->rooms->sortBy(function($room) {
+            // Inisialisasi default untuk number dan suffix
+            $number = 0;
+            $suffix = '';
+        
+            // Ekstrak angka dari nama kamar
+            if (preg_match('/\d+/', $room->name, $matches)) {
+                $number = (int)$matches[0];
+                // Ekstrak bagian string setelah angka untuk sorting lebih lanjut jika ada
+                $suffix = trim(str_replace($matches[0], '', $room->name));
+            }
+        
+            // Menggabungkan angka dan suffix untuk sorting
+            return [$number, $suffix];
+        });
+        $rooms = $rooms->values();
 
         return view('admin.floor', compact('floors', 'rooms', 'lantai'));
     }
