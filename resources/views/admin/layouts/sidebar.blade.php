@@ -54,7 +54,7 @@
                     <ul class="nav nav-treeview">
                         @foreach ($floors as $floor)
                             <li class="nav-item">
-                                <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link {{ Request::route('id') == $floor->id ? 'active' : '' }}">
+                                <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link {{ Request::is('admin/floors/' . $floor->id) ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ $floor->name }}</p>
                                 </a>
