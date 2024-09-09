@@ -35,8 +35,8 @@
                             <label for="condition">Kondisi</label>
                             {{-- <input type="text" class="form-control" id="condition" placeholder="Enter condition"
                                 name="condition"> --}}
-                            <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition">
-                                <option value="">Select Kondisi</option>
+                            <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition" required>
+                                <option value="">Pilih Kondisi</option>
                                 <option value="BAIK">BAIK</option>
                                 <option value="RUSAK">RUSAK</option>
                                 <option value="TIDAK TERSEDIA">TIDAK TERSEDIA</option>
@@ -49,6 +49,17 @@
                                     data-target="#reservationdate" name="last_checked_date" />
                             </div>
                         </div> --}}
+
+                        <div class="form-group">
+                            <label for="clean_status">Clean Status</label>
+                            {{-- <input type="text" class="form-control" id="clean_status" name="clean_status" value="{{ $item->clean_status }}"> --}}
+                            <select id="clean_status" class="form-control select2bs4" style="width: 100%;" name="clean_status" required>
+                                <option value="">Pilih Status</option>
+                                <option value="1">Bersih</option>
+                                <option value="0">Kotor</option>
+                            </select>
+                        </div>
+
 
                         <div class="form-group">
                             <label>Lantai</label>
@@ -97,4 +108,14 @@
 
         </div>
     </div>
+    <script>
+        $(function () {
+            $("input[data-bootstrap-switch]").each(function(){
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+                $(this).on('switchChange.bootstrapSwitch', function(event, state) {
+                    $(this).val(state ? 1 : 0);
+                });
+            });
+        });
+    </script>
 @endsection

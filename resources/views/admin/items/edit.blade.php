@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label for="condition">Kondisi</label>
                             {{-- <input type="text" class="form-control" id="condition" name="condition" value="{{ $item->condition }}"> --}}
-                            <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition">
+                            <select id="condition" class="form-control select2bs4" style="width: 100%;" name="condition" required>
                                 <option value="">Pilih Kondisi</option>
                                 <option value="BAIK" {{ $item->condition == "BAIK" ? 'selected' : '' }}>BAIK</option>
                                 <option value="RUSAK" {{ $item->condition == "RUSAK" ? 'selected' : '' }}>RUSAK</option>
@@ -48,6 +48,16 @@
                             <label for="last_checked_date">Last Checked Date:</label>
                             <input type="date" id="last_checked_date" class="form-control" name="last_checked_date" value="{{ $item->last_checked_date }}">
                         </div> --}}
+
+                        <div class="form-group">
+                            <label for="clean_status">Clean Status</label>
+                            {{-- <input type="text" class="form-control" id="clean_status" name="clean_status" value="{{ $item->clean_status }}"> --}}
+                            <select id="clean_status" class="form-control select2bs4" style="width: 100%;" name="clean_status" required>
+                                <option value="">Pilih Kondisi</option>
+                                <option value="1" {{ $item->clean_status == 1 ? 'selected' : '' }}>Bersih</option>
+                                <option value="0" {{ $item->clean_status == 0 ? 'selected' : '' }}>Kotor</option>
+                            </select>
+                        </div>
             
                         <div class="form-group">
                             <label for="floor">Lantai</label>
@@ -87,4 +97,14 @@
 
         </div>
     </div>
+    <script>
+        $(function() {
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+                $(this).on('switchChange.bootstrapSwitch', function(event, state) {
+                    $(this).val(state ? 1 : 0);
+                });
+            });
+        });
+    </script>
 @endsection

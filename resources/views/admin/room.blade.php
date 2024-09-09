@@ -27,7 +27,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
+                    <table class="table table-hover text-nowrap table-bordered">
                         <thead>
                             <tr>
                                 <th>QR</th>
@@ -35,6 +35,7 @@
                                 <th>nama</th>
                                 <th>Code</th>
                                 <th>Kondisi</th>
+                                <th>Clean Status</th>
                                 <th>Merk</th>
                                 <th>Tanggal Cek</th>
                                 <th>Action</th>
@@ -48,6 +49,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->condition }}</td>
+                                    <td>{{ $item->clean_status ? 'Bersih' : 'Kotor' }}</td>
                                     <td>{{ $item->merk }}</td>
                                     <td>{{ $formattedDateItem = Carbon::parse($item->updated_at)->translatedFormat('l, j F Y, H:i') }}</td>
                                     <td>

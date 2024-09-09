@@ -17,6 +17,7 @@ class ItemLog extends Model
         'entry_date',
         'last_checked_date',
         'condition',
+        'clean_status',
     ];
 
     public function item()

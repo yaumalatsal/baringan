@@ -25,7 +25,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <h1>{{ $item->name }}</h1>
-                    <div class="item-image-wrapper">
+                    <div class="item-image-wrapper my-3">
                         <img src="{{ $item->image ? asset('storage/images/' . $item->image) : asset('image/image-not-found.jpeg') }}"
                             alt="{{ $item->name }}" class="img-fluid">
                     </div>
@@ -59,7 +59,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
+                    <table class="table table-hover text-nowrap table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -68,6 +68,7 @@
                                 <th>Merk</th>
                                 <th>Tanggal Cek</th>
                                 <th>Kondisi</th>
+                                <th>Status Kebersihan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +80,7 @@
                                     <td>{{ $log->merk }}</td>
                                     <td>{{ $formattedDateItem = Carbon::parse($log->created_at)->translatedFormat('l, j F Y, H:i') }}</td>
                                     <td>{{ $log->condition }}</td>
+                                    <td>{{ $log->clean_status ? 'Bersih' : 'Kotor' }}</td>
                                 </tr>
                             @endforeach
 

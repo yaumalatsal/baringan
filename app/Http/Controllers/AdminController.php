@@ -106,6 +106,7 @@ class AdminController extends Controller
             // 'entry_date' => 'required|date',
             // 'last_checked_date' => 'required|date',
             'condition' => 'required|string|max:255',
+            'clean_status' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:100000', // Validasi untuk gambar
             'room_id' => 'required|exists:rooms,id', // Pastikan room_id valid
             // 'floor_id' => 'required|exists:floors,id', // Pastikan floor_id valid
@@ -160,6 +161,7 @@ class AdminController extends Controller
             // 'entry_date' => 'required|date',
             // 'last_checked_date' => 'required|date',
             'condition' => 'required|string|max:255',
+            'clean_status' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:204800',
             'room_id' => 'required|exists:rooms,id',
         ]);
@@ -189,6 +191,7 @@ class AdminController extends Controller
             // 'entry_date' => $item->entry_date,
             // 'last_checked_date' => $item->last_checked_date,
             'condition' => $item->condition,
+            'clean_status' => $item->clean_status,
         ]);
 
         // Redirect with success message
