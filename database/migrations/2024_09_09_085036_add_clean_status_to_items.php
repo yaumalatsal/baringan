@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->boolean('clean_status')->nullable()->default(0)->after('condition');
+            $table->boolean('clean_status')->nullable()->default(1)->after('condition');
         });
     }
 
