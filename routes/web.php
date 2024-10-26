@@ -88,7 +88,7 @@ Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
 // Route::put('/items/{item}', 'App\Http\Controllers\ItemController@update')->name('items.update');
 
 // // routes/web.php
-// Route::post('/download-qrcode', 'App\Http\Controllers\ItemController@downloadQrCode')->name('download.qrcode');
+Route::post('/download-qrcode', 'App\Http\Controllers\ItemController@downloadQrCode')->name('download.qrcode');
 
 // Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
 

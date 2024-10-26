@@ -17,7 +17,9 @@
         @endif
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
         <h3>List Barang {{ $room->name }}</h3>
+        @if (auth()->user()->role === 'ADMIN' || auth()->user()->floors->contains($room->floor_id))
         <a href="{{ route('admin.items.create', ['room_id' => $room->id]) }}" class="btn btn-block btn-success w-auto">Add Items</a>
+        @endif
     </div>
     <div class="row mt-4">
         <div class="col-12">
@@ -55,6 +57,7 @@
                                     <td>
                                         <div class="flex">
                                             <a href="{{ route('admin.items', $item->id) }}" class="btn btn-block btn-primary">View</a>
+                                            @if (auth()->user()->role === 'ADMIN' || auth()->user()->floors->contains($room->floor_id))
                                             <a href="http://139.255.11.206:8083/espbk" class="btn btn-block btn-info">Tinjau</a>
 
                                             <a href="{{ route('admin.items.edit', $item->id) }}" class="btn btn-block btn-warning">Edit</a>
@@ -63,11 +66,12 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-block btn-danger mt-2">Delete</button>
                                             </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
-                           
+
                         </tbody>
                     </table>
                 </div>

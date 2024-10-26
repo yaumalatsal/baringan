@@ -3,8 +3,23 @@
 @section('content')
     <div class="container-fluid d-flex justify-content-between fw-bold pt-4 mb-4">
         <h3>List Lantai </h3>
-        <a href="{{ route('admin.floors.create') }}" class="btn btn-block btn-success w-auto">Add Lantai</a>
+        @if (auth()->user()->role === 'ADMIN')
+            <a href="{{ route('admin.floors.create') }}" class="btn btn-block btn-success w-auto">Add Lantai</a>
+        @endif
     </div>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="row">
         @foreach ($floors as $floor)
             <div class="col-lg-4 col-6">
@@ -18,8 +33,13 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{ route('admin.floors', $floor->id) }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    <a href="{{ route('admin.floors.edit', $floor->id) }}" class="small-box-footer">Edit  <i class="fas fa-solid fa-pen"></i></a>
+                    <a href="{{ route('admin.floors', $floor->id) }}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                    @if (auth()->user()->role === 'ADMIN' ||
+                            auth()->user()->floors->contains($floor->id))
+                        <a href="{{ route('admin.floors.edit', $floor->id) }}" class="small-box-footer">Edit <i
+                                class="fas fa-solid fa-pen"></i></a>
+                    @endif
                 </div>
             </div>
         @endforeach
@@ -82,5 +102,4 @@
             </div>
         @endforeach
     </div>
-
 @endsection

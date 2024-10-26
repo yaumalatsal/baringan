@@ -62,7 +62,7 @@
                         @endforeach
                     </ul>
                 </li>
-                @if(auth()->user() && auth()->user()->role === 'USER')
+                @if(auth()->user() && auth()->user()->role === 'ADMIN')
                 <li class="nav-item">
                     <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>

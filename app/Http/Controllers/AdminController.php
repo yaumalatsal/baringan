@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\ItemLog;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -35,14 +36,14 @@ class AdminController extends Controller
             // Inisialisasi default untuk number dan suffix
             $number = 0;
             $suffix = '';
-        
+
             // Ekstrak angka dari nama kamar
             if (preg_match('/\d+/', $room->name, $matches)) {
                 $number = (int)$matches[0];
                 // Ekstrak bagian string setelah angka untuk sorting lebih lanjut jika ada
                 $suffix = trim(str_replace($matches[0], '', $room->name));
             }
-        
+
             // Menggabungkan angka dan suffix untuk sorting
             return [$number, $suffix];
         });
@@ -86,6 +87,10 @@ class AdminController extends Controller
         $room_id = $request->query('room_id');
         $room = Room::find($room_id);
         $rooms = Room::where('floor_id', $room->floor_id)->get();
+
+        if (Auth::user()->role !== 'ADMIN' && !Auth::user()->floors->contains($room->floor_id)) {
+            return redirect()->route('admin')->with('error', 'You do not have permission to add item.');
+        }
 
 
         return view('admin.items.create', compact('floors', 'room_id', 'room', 'rooms'));
@@ -140,6 +145,9 @@ class AdminController extends Controller
         $item = Item::find($id);
         if (!$item) {
             abort(404); // Jika room tidak ditemukan, tampilkan 404 error
+        }
+        if (Auth::user()->role !== 'ADMIN' && !Auth::user()->floors->contains($item->room->floor_id)) {
+            return redirect()->route('admin')->with('error', 'You do not have permission to edit this item.');
         }
         $rooms = Room::where('floor_id', $item->room->floor_id)->get();
 
@@ -219,7 +227,11 @@ class AdminController extends Controller
     // floor
     public function createFloor(Request $request)
     {
+        if (Auth::user()->role !== 'ADMIN') {
+            return redirect()->route('admin')->with('error', 'You do not have permission to add floor.');
+        }
         $floors = Floor::all();
+
 
         return view('admin.floors.create', compact('floors'));
     }
@@ -241,6 +253,9 @@ class AdminController extends Controller
     {
         $floors = Floor::all();
         $floor = Floor::find($id);
+        if (Auth::user()->role !== 'ADMIN' && !Auth::user()->floors->contains($floor->id)) {
+            return redirect()->route('admin')->with('error', 'You do not have permission to edit this floor.');
+        }
 
         return view('admin.floors.edit', compact('floors', 'floor'));
     }
@@ -292,6 +307,10 @@ class AdminController extends Controller
         $floors = Floor::all();
         $floor_id = $request->query('floor_id');
 
+        if (Auth::user()->role !== 'ADMIN' && !Auth::user()->floors->contains($floor_id)) {
+            return redirect()->route('admin')->with('error', 'You do not have permission to add room in this floor.');
+        }
+
         return view('admin.rooms.create', compact('floors', 'floor_id'));
     }
 
@@ -315,6 +334,10 @@ class AdminController extends Controller
     {
         $floors = Floor::all();
         $room = Room::find($id);
+
+        if (Auth::user()->role !== 'ADMIN' && !Auth::user()->floors->contains($room->floor_id)) {
+            return redirect()->route('admin')->with('error', 'You do not have permission to edit this room.');
+        }
 
         return view('admin.rooms.edit', compact('floors', 'room'));
     }

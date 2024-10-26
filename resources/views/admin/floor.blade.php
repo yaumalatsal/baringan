@@ -8,7 +8,7 @@
         border-radius: 50%;
         margin-left: 8px;
     }
-    
+
 
     .status-text {
         font-weight: bold;
@@ -25,7 +25,7 @@
         color: red;
     }
 
-    
+
 </style>
 @if (session('success'))
             <div class="alert alert-success">
@@ -34,7 +34,9 @@
         @endif
     <div class="container-fluid d-flex justify-content-between fw-bold pt-4 mb-4">
         <h3>List Ruangan {{ $lantai->name }}</h3>
-        <a href="{{ route('admin.rooms.create',['floor_id' => $lantai->id]) }}" class="btn btn-block btn-success w-auto">Add Kamar</a>
+        @if (auth()->user()->role === 'ADMIN' || auth()->user()->floors->contains($lantai->id))
+            <a href="{{ route('admin.rooms.create',['floor_id' => $lantai->id]) }}" class="btn btn-block btn-success w-auto">Add Kamar</a>
+        @endif
     </div>
     <div class="row">
         @foreach ($rooms as $room)
@@ -43,7 +45,7 @@
                 <div class="small-box {{ $room->patient ? 'bg-info' : 'bg-warning'}} w-full">
                     <div class="inner w-full text-left">
                         <h4 class="font-weight-bold">{{ $room->name }}</h4>
-                        
+
                         <p class="w-full d-flex justify-content-end">
                             <span class="status-text">Status Kamar : </span>
                             <span class="status-text">{{ $room->status ? 'Siap' : 'Belum Siap'}}</span>
@@ -54,7 +56,9 @@
                         <i class="ion ion-bag"></i>
                     </div>
                     <a href="{{ route('admin.rooms', $room->id) }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    <a href="{{ route('admin.rooms.edit', $room->id) }}" class="small-box-footer">Edit  <i class="fas fa-solid fa-pen"></i></a>
+                    @if (auth()->user()->role === 'ADMIN' || auth()->user()->floors->contains($lantai->id))
+                        <a href="{{ route('admin.rooms.edit', $room->id) }}" class="small-box-footer">Edit  <i class="fas fa-solid fa-pen"></i></a>
+                    @endif
                 </div>
             </div>
         @endforeach
