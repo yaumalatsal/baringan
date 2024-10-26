@@ -41,9 +41,9 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-        
+
                 <!-- Lantai Menu -->
-                <li class="nav-item {{ Request::is('admin') ? '' : 'menu-open' }}">
+                <li class="nav-item {{ request()->is('admin/floors') ? '' : 'menu-open' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -62,22 +62,30 @@
                         @endforeach
                     </ul>
                 </li>
+                @if(auth()->user() && auth()->user()->role === 'USER')
+                <li class="nav-item">
+                    <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>User</p>
+                    </a>
+                </li>
+                @endif
             </ul>
-        
+
             <!-- Logout Link -->
             <ul class="navbar-nav text-center mt-40">
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="nav-link">
-                            
+
                             <p><i class="fas fa-sign-out-alt nav-icon"></i>  Logout</p>
                         </a>
                     </form>
                 </li>
             </ul>
         </nav>
-        
+
           <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->

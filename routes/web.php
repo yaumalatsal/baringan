@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\UserController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -25,26 +26,32 @@ Route::middleware([
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/floors/{id}', [AdminController::class, 'floors'])->name('admin.floors');
     Route::get('/admin/rooms/{id}', [AdminController::class, 'rooms'])->name('admin.rooms');
-    
+
     Route::get('/admin/items', [AdminController::class, 'createItem'])->name('admin.items.create');
     Route::post('/admin/items', [AdminController::class, 'storeItem'])->name('admin.items.store');
     Route::get('/admin/items/{id}/edit', [AdminController::class, 'editItem'])->name('admin.items.edit');
     Route::put('/admin/items/{id}', [AdminController::class, 'updateItem'])->name('admin.items.update');
     Route::delete('/admin/items/{id}', [AdminController::class, 'destroyItem'])->name('admin.items.delete');
-    
+
     // floor
     Route::get('/admin/floors', [AdminController::class, 'createFloor'])->name('admin.floors.create');
     Route::post('/admin/floors', [AdminController::class, 'storeFloor'])->name('admin.floors.store');
     Route::get('/admin/floors/{id}/edit', [AdminController::class, 'editFloor'])->name('admin.floors.edit');
     Route::put('/admin/floors/{id}', [AdminController::class, 'updateFloor'])->name('admin.floors.update');
     Route::delete('/admin/floors/{id}', [AdminController::class, 'destroyFloor'])->name('admin.floors.delete');
-    
+
     // room
     Route::get('/admin/rooms', [AdminController::class, 'createRoom'])->name('admin.rooms.create');
     Route::post('/admin/rooms', [AdminController::class, 'storeRoom'])->name('admin.rooms.store');
     Route::get('/admin/rooms/{id}/edit', [AdminController::class, 'editRoom'])->name('admin.rooms.edit');
     Route::put('/admin/rooms/{id}', [AdminController::class, 'updateRoom'])->name('admin.rooms.update');
     Route::delete('/admin/rooms/{id}', [AdminController::class, 'destroyRoom'])->name('admin.rooms.delete');
+
+
+    // user
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+
 });
 Route::get('/admin/items/{id}', [AdminController::class, 'items'])->name('admin.items');
 Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
