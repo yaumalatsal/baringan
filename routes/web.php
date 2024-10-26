@@ -46,6 +46,10 @@ Route::middleware([
     Route::get('/rooms/{id}/edit', [AdminController::class, 'editRoom'])->name('admin.rooms.edit');
     Route::put('/rooms/{id}', [AdminController::class, 'updateRoom'])->name('admin.rooms.update');
     Route::delete('/rooms/{id}', [AdminController::class, 'destroyRoom'])->name('admin.rooms.delete');
+
+    // user
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
 });
 Route::get('/items/{id}', [AdminController::class, 'items'])->name('admin.items');
 Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
