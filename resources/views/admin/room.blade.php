@@ -46,7 +46,7 @@
                         <tbody>
                             @foreach ($items as $item)
                                 <tr>
-                                    <td>{{ QrCode::size(100)->generate(url('/admin/items/' . $item->id)) }}</td>
+                                    <td>{{ QrCode::size(100)->generate(url('/items/' . $item->id)) }}</td>
                                     <td><img src="{{ $item->image ? asset('storage/images/' . $item->image) : asset('image/image-not-found.jpeg') }}" alt="{{ $item->name }}" class="img-fluid" style="width: 100px; height: 100px;"></td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->code }}</td>

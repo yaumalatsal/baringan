@@ -106,10 +106,16 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
+        if ($request->password) {
+            $password = Hash::make($request->password);
+        }else {
+            $password = $user->password;
+        }
         $user->update([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
+            'password' => $password,
             'role' => $request->role,
         ]);
 
