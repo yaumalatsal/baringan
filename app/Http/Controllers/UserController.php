@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Floor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $floors = Floor::all();
+        return view('admin.users.create', compact('floors'));
     }
 
     /**
@@ -32,7 +34,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|string',
+            'floors' => 'required|array', // Validate that floors are selected
+            'floors.*' => 'exists:floors,id'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+
+        // Attach selected floors to user
+        $user->floors()->sync($request->floors);
+
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -48,7 +71,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::with('floors')->findOrFail($id);
+        $floors = Floor::all();
+        return view('admin.users.edit', compact('user', 'floors'));
     }
 
     /**
@@ -56,7 +81,27 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'role' => 'required|string',
+            'floors' => 'required|array', // Ensure floors are selected
+            'floors.*' => 'exists:floors,id' // Ensure each selected floor ID exists in floors table
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'role' => $request->role,
+        ]);
+
+        // Sync selected floors with user
+        $user->floors()->sync($request->floors);
+
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
 
     /**

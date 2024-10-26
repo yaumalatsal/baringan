@@ -13,4 +13,10 @@ class UserFloor extends Model
         'user_id',
         'floor_id'
     ];
+
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_floors');
+    }
 }

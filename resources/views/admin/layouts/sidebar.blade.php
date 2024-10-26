@@ -36,14 +36,14 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Dashboard Link -->
                 <li class="nav-item">
-                    <a href="{{ route('admin') }}" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                    <a href="{{ route('admin') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
                 <!-- Lantai Menu -->
-                <li class="nav-item {{ request()->is('admin/floors') ? '' : 'menu-open' }}">
+                <li class="nav-item {{ request()->is('/floors') ? '' : 'menu-open' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -54,7 +54,7 @@
                     <ul class="nav nav-treeview">
                         @foreach ($floors as $floor)
                             <li class="nav-item">
-                                <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link {{ Request::is('admin/floors/' . $floor->id) ? 'active' : '' }}">
+                                <a href="{{ route('admin.floors', $floor->id) }}" class="nav-link {{ Request::is('floors/' . $floor->id) ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ $floor->name }}</p>
                                 </a>

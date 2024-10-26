@@ -64,4 +64,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function floors()
+    {
+        return $this->belongsToMany(Floor::class, 'user_floors');
+    }
 }

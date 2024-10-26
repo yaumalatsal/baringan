@@ -50,12 +50,19 @@ Route::middleware([
     // user
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
+    Route::post('/admin/users/store', [UserController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 Route::get('/items/{id}', [AdminController::class, 'items'])->name('admin.items');
 Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
 
 Route::get('/generate-qrcode', 'QrCodeController@generate');
 Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
+
+
 
 // use App\Http\Controllers\FloorController;
 // use App\Http\Controllers\RoomController;
