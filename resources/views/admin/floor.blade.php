@@ -3,11 +3,16 @@
 @section('content')
 <style>
     .status-icon {
-        font-size: em;
-        border: 8px solid rgb(0, 0, 0);
-        border-radius: 50%;
-        margin-left: 8px;
-    }
+    font-size: 16px; /* Set a fixed font size */
+    border: 8px solid rgb(0, 0, 0);
+    border-radius: 50%; /* Ensure it stays circular */
+    margin-left: 8px;
+    width: 30px; /* Set a fixed width */
+    height: 30px; /* Set a fixed height */
+    display: flex; /* Flexbox for centering the icon */
+    justify-content: center; /* Center the icon */
+    align-items: center; /* Center the icon */
+}
 
 
     .status-text {
