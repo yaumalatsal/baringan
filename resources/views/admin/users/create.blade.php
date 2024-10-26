@@ -70,13 +70,14 @@
 
                     <div class="form-group">
                         <label for="floors">Select Floors</label>
-                        <select name="floors[]" id="floors" class="form-control @error('floors') is-invalid @enderror" multiple>
+                        <div class="checkbox-group" style="display: flex; flex-wrap: wrap; gap: 10px;">
                             @foreach ($floors as $floor)
-                                <option value="{{ $floor->id }}" {{ (collect(old('floors'))->contains($floor->id)) ? 'selected' : '' }}>
-                                    {{ $floor->name }}
-                                </option>
+                                <label class="checkbox-item" style="display: inline-flex; align-items: center; padding: 8px; background: #f8f9fa; border: 1px solid #ced4da; border-radius: 4px;">
+                                    <input type="checkbox" name="floors[]" value="{{ $floor->id }}">
+                                    <span style="margin-left: 8px;">{{ $floor->name }}</span>
+                                </label>
                             @endforeach
-                        </select>
+                        </div>
                         @error('floors')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
