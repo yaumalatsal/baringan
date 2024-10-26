@@ -62,6 +62,7 @@ Route::get('/floors/{floor}', [AdminController::class, 'getRoomsByFloor']);
 Route::get('/generate-qrcode', 'QrCodeController@generate');
 Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
 
+Route::post('/download-qrcode', 'App\Http\Controllers\ItemController@downloadQrCode')->name('download.qrcode');
 
 
 // use App\Http\Controllers\FloorController;
@@ -88,7 +89,6 @@ Route::get('/generate-qrcode', [QrCodeController::class, 'generate']);
 // Route::put('/items/{item}', 'App\Http\Controllers\ItemController@update')->name('items.update');
 
 // // routes/web.php
-Route::post('/download-qrcode', 'App\Http\Controllers\ItemController@downloadQrCode')->name('download.qrcode');
 
 // Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
 
