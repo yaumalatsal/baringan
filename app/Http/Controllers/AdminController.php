@@ -233,7 +233,7 @@ class AdminController extends Controller
 
         Floor::create($validatedData);
 
-        return redirect()->route('admin')
+        return redirect()->route('/')
             ->with('success', 'Item deleted successfully.');
     }
 
