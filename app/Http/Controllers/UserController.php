@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Floor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -14,6 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role !== 'ADMIN') {
+            return redirect()->route('admin')->with('error', 'You do not have permission to do this action.');
+        }
         $floors = Floor::all();
         $users = User::all();
 
@@ -25,6 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->role !== 'ADMIN') {
+            return redirect()->route('admin')->with('error', 'You do not have permission to do this action.');
+        }
         $floors = Floor::all();
         return view('admin.users.create', compact('floors'));
     }
@@ -63,6 +70,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        if (Auth::user()->role !== 'ADMIN') {
+            return redirect()->route('admin')->with('error', 'You do not have permission to do this action.');
+        }
         $user = User::with('floors')->findOrFail($id);
         $floors = Floor::all();
         return view('admin.users.show', compact('user', 'floors'));
@@ -73,6 +83,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        if (Auth::user()->role !== 'ADMIN') {
+            return redirect()->route('admin')->with('error', 'You do not have permission to do this action.');
+        }
         $user = User::with('floors')->findOrFail($id);
         $floors = Floor::all();
         return view('admin.users.edit', compact('user', 'floors'));
