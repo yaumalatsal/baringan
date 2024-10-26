@@ -245,8 +245,8 @@ class AdminController extends Controller
 
         Floor::create($validatedData);
 
-        return redirect()->route('/')
-            ->with('success', 'Item deleted successfully.');
+        return redirect()->route('admin')
+            ->with('success', 'Floor added successfully.');
     }
 
     public function editFloor($id)
