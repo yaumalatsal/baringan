@@ -16,14 +16,14 @@
             </div>
         @endif
     <div class=" container-fluid d-flex justify-content-between fw-bold pt-4">
-        <h3>List User </h3>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-block btn-success w-auto">Add Items</a>
+        <h3>List Pengguna </h3>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-block btn-success w-auto">Tambah Pengguna</a>
     </div>
     <div class="row mt-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">List User</h3>
+                    <h3 class="card-title">List Pengguna</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
@@ -48,13 +48,14 @@
                                     <td>{{ $user->role }}</td>
                                     <td>
                                         <div class="flex">
-                                            {{-- <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-block btn-primary">View</a> --}}
+                                            {{-- <a href="{{ url('/admin/user/show', $user->id) }}" class="btn btn-block btn-primary">View</a> --}}
+                                            <a href="{{ url('/admin/users/show/' . $user->id) }}" class="btn btn-block btn-primary">View</a>
                                             <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-block btn-warning">Edit</a>
-                                            {{-- <form action="{{ route('admin.users.delete', $user->id) }}" method="POST"  onsubmit="return confirmDelete(this);">
+                                            <form action="{{ route('admin.users.delete', $user->id) }}" method="POST"  onsubmit="return confirmDelete(this);">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-block btn-danger mt-2">Delete</button>
-                                            </form> --}}
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
