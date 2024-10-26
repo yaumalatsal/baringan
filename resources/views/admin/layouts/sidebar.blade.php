@@ -45,7 +45,7 @@
                 <!-- Lantai Menu -->
                 <li class="nav-item {{ request()->is('/floors') ? '' : 'menu-open' }}">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-th-large"></i>
                         <p>
                             Lantai
                             <i class="right fas fa-angle-left"></i>
@@ -65,7 +65,7 @@
                 @if(auth()->user() && auth()->user()->role === 'ADMIN')
                 <li class="nav-item">
                     <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>User</p>
                     </a>
                 </li>
