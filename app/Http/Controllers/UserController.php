@@ -63,7 +63,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::with('floors')->findOrFail($id);
+        $floors = Floor::all();
+        return view('admin.users.show', compact('user', 'floors'));
     }
 
     /**
@@ -109,6 +111,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->floors()->detach();
+        $user->delete();
+
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
 }
