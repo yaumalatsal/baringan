@@ -16,8 +16,13 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $floors = Floor::all();
-        return view('admin.index', compact('floors'));
+        $floors = Floor::withCount(['rooms as room_total_patients' => function ($query) {
+            $query->where('patient', 1);
+        }])->get();
+
+        $total_patients = Room::where('patient', 1)->count();
+        $total_rooms = Room::where('status', 1)->count();
+        return view('admin.index', compact('floors','total_patients', 'total_rooms'));
     }
 
     public function floors($id)
@@ -32,7 +37,7 @@ class AdminController extends Controller
         // ->where('floor_id',$id)
         // ->orderBy(DB::raw('LENGTH(name), name'))
         // ->get();
-        $rooms = $lantai->rooms->sortBy(function($room) {
+        $rooms = $lantai->rooms->sortBy(function ($room) {
             // Inisialisasi default untuk number dan suffix
             $number = 0;
             $suffix = '';
@@ -48,8 +53,10 @@ class AdminController extends Controller
             return [$number, $suffix];
         });
         $rooms = $rooms->values();
+        $pasien = Room::where('patient', 1)->where('floor_id', $id)->count();
+        $room_ready = Room::where('status', 1)->where('floor_id', $id)->count();
 
-        return view('admin.floor', compact('floors', 'rooms', 'lantai'));
+        return view('admin.floor', compact('floors', 'rooms', 'lantai', 'pasien', 'room_ready'));
     }
 
 
@@ -76,7 +83,9 @@ class AdminController extends Controller
     {
         $floors = Floor::all();
 
-        $item = Item::with('room.floor', 'logs')->find($id);
+        $item = Item::with(['room.floor', 'logs' => function ($query) {
+            $query->orderBy('updated_at', 'desc');
+        }])->find($id);
 
         return view('admin.items.detail', compact('floors', 'item'));
     }
@@ -185,27 +194,29 @@ class AdminController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/images', $imageName);
 
-            $item->update(array_merge($validatedData, ['image' => $imageName]));
+            $updateStatus = $item->update(array_merge($validatedData, ['image' => $imageName]));
         } else {
-            $item->update($validatedData);
+            $updateStatus = $item->update($validatedData);
         }
 
-        ItemLog::create([
-            'item_id' => $item->id,
-            'room_id' => $item->room_id,
-            'name' => $item->name,
-            'code' => $item->code,
-            'merk' => $item->merk,
-            // 'entry_date' => $item->entry_date,
-            // 'last_checked_date' => $item->last_checked_date,
-            'condition' => $item->condition,
-            'clean_status' => $item->clean_status,
-        ]);
+        if ($updateStatus) {
+            $item->touch();
+            ItemLog::create([
+                'item_id' => $item->id,
+                'room_id' => $item->room_id,
+                'name' => $item->name,
+                'code' => $item->code,
+                'merk' => $item->merk,
+                // 'entry_date' => $item->entry_date,
+                // 'last_checked_date' => $item->last_checked_date,
+                'condition' => $item->condition,
+                'clean_status' => $item->clean_status,
+            ]);
+        }
 
         // Redirect with success message
         return redirect()->route('admin.rooms', $item->room_id)
             ->with('success', 'Item updated successfully.');
-
     }
     public function destroyItem($id)
     {
@@ -379,5 +390,4 @@ class AdminController extends Controller
         return redirect()->route('admin.floors', ['id' => $room->floor_id])
             ->with('success', 'Room and related items deleted successfully.');
     }
-
 }

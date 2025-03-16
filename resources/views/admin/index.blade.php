@@ -22,11 +22,12 @@
     @endif
     <div class="row">
         @foreach ($floors as $floor)
-            <div class="col-lg-4 col-6">
+            <div class="col-lg-4 col-md-6 col-12">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner text-left ">
                         <h4 class="font-weight-bold">{{ $floor->name }}</h4>
+                        <p class="font-weight-bold">Pasien : {{ $floor->room_total_patients ?? 0 }}</p>
 
                         {{-- <p>New Orders</p> --}}
                     </div>
@@ -45,7 +46,32 @@
         @endforeach
     </div>
 
-    <div class="container-fluid d-flex justify-content-between fw-bold pt-4 mb-4">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="small-box">
+                <div class="bg-primary text-center p-2">
+                    <h4>Total Pasien</h4>
+                </div>
+                <div class="py-4 bg-white">
+                    <h1 class="card-text text-center text-bold">{{ $total_patients }}</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kotak Total Kamar Siap -->
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="small-box">
+                <div class="bg-primary text-center p-2">
+                    <h4>Total Kamar Siap</h4>
+                </div>
+                <div class="py-4 bg-white">
+                    <h1 class="card-text text-center text-bold">{{ $total_rooms }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-flex justify-content-between fw-bold pt-4 mb-4">
         <h3>Status Kamar </h3>
     </div>
 
