@@ -24,6 +24,8 @@ WORKDIR /var/www
 
 # Dependencies first (cached layer)
 COPY composer.json composer.lock ./
+# Copy artisan so post-autoload scripts can run
+COPY artisan ./
 RUN composer install --no-interaction --no-progress --prefer-dist
 
 # Application code
