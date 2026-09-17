@@ -13,7 +13,7 @@ FROM php:8.2-fpm
 
 # Build deps: git for composer, unzip, libzip for Laravel, gd for images
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git curl libpng-dev libonig-dev libxml2-dev libzip-dev zip unzip \
+    git curl libpng-dev libjpeg-dev libfreetype-dev libonig-dev libxml2-dev libzip-dev zip unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip opcache \
     && rm -rf /var/lib/apt/lists/*
