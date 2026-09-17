@@ -9,8 +9,6 @@ services:
       - baringan-db:/var/www/database
     expose:
       - "9000"
-    depends_on:
-      - nginx
 
   nginx:
     image: nginx:1.27-alpine
