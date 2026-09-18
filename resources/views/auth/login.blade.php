@@ -50,4 +50,9 @@
             </div>
         </form>
     </x-authentication-card>
+
+    {{-- Aggregate totals only, and nothing at all on an empty install.
+         Someone who cannot sign in still gets to see whether the system
+         holds anything worth signing in for. --}}
+    <x-public-stats />
 </x-guest-layout>
