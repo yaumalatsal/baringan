@@ -32,20 +32,49 @@ class PublicStats extends Component
 
     public function __construct()
     {
+        // Caching and reading are attempted separately on purpose.
+        //
+        // They were one try/catch around cache()->remember(), which hid a real
+        // fault for a long time: this install keeps its SQLite file in a
+        // directory www-data could not write, so every cache write threw.
+        // remember() therefore failed before the closure's value was ever
+        // returned, the catch set available=false, and the strip silently
+        // vanished on the live site while working perfectly from the CLI.
+        //
+        // A cache that will not write is a performance problem. It is not a
+        // reason to stop showing figures the database will happily return.
         try {
-            $this->stats = cache()->remember(
-                self::CACHE_KEY,
-                self::CACHE_SECONDS,
-                fn () => $this->gather(),
-            );
-            // An empty install shows nothing rather than a row of zeros, which
-            // reads as broken rather than new.
-            $this->available = ($this->stats['items'] ?? 0) > 0;
+            $cached = cache()->get(self::CACHE_KEY);
         } catch (Throwable) {
-            // The landing page must render even when the database does not
-            // answer. A missing strip is better than a 500 on the front door.
-            $this->available = false;
+            $cached = null;
         }
+
+        if (is_array($cached) && $cached !== []) {
+            $this->stats = $cached;
+        } else {
+            try {
+                $this->stats = $this->gather();
+            } catch (Throwable) {
+                // Only a failed read hides the strip. The landing page must
+                // still render when the database does not answer at all —
+                // a missing strip beats a 500 on the front door.
+                $this->available = false;
+
+                return;
+            }
+
+            // Best effort. A store that refuses the write costs a few queries
+            // on the next request and nothing else.
+            try {
+                cache()->put(self::CACHE_KEY, $this->stats, self::CACHE_SECONDS);
+            } catch (Throwable) {
+                // Deliberately ignored, and deliberately not fatal.
+            }
+        }
+
+        // An empty install shows nothing rather than a row of zeros, which
+        // reads as broken rather than new.
+        $this->available = ($this->stats['items'] ?? 0) > 0;
     }
 
     private function gather(): array
